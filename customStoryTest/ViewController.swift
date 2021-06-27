@@ -9,8 +9,6 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    
-
 //    private let storyFullScreenViewer = UIStoryboard(name: "StoryView", bundle: nil).instantiateViewController(identifier: "StoryFullScreenViewer") as! StoryFullScreenViewer
     
     override func viewDidLoad() {
