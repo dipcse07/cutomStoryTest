@@ -11,6 +11,10 @@ class ViewController: UIViewController, FullScreenSotryDelegate {
     func currentStory(story: IGStory) {
         print("this is printing from the delegate")
     }
+    func profileImageTapped(userInfo: IGUser) {
+        print("current userName: ", userInfo.name)
+        print("current userProfileImage: ", userInfo.picture)
+    }
     
 
 //    private let storyFullScreenViewer = UIStoryboard(name: "StoryView", bundle: nil).instantiateViewController(identifier: "StoryFullScreenViewer") as! StoryFullScreenViewer

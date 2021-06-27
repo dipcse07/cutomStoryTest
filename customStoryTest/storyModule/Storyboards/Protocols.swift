@@ -8,4 +8,5 @@
 import Foundation
 protocol FullScreenSotryDelegate {
     func currentStory(story: IGStory)
+    func profileImageTapped(userInfo: IGUser)
 }

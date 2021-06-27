@@ -152,7 +152,8 @@ class StoryFullScreenViewer: UIViewController {
         let tappedImage = tapGestureRecognizer.view as! UIImageView
 
         // Your action
-        self.dismiss(animated: true, completion: nil)
+        let currentUserInfo = stories[currentViewingStoryIndex].user
+        fullScreenStoryDelegate.profileImageTapped(userInfo: currentUserInfo)
         
         
     }
