@@ -142,6 +142,18 @@ class StoryFullScreenViewer: UIViewController {
         swipeLeft.direction = .left
            self.view.addGestureRecognizer(swipeLeft)
        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+            avatarImageView.isUserInteractionEnabled = true
+            avatarImageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
+    {
+        let tappedImage = tapGestureRecognizer.view as! UIImageView
+
+        // Your action
+        self.dismiss(animated: true, completion: nil)
+        
         
     }
 
