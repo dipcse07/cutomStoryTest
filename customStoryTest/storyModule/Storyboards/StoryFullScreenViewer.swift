@@ -40,10 +40,7 @@ class StoryFullScreenViewer: UIViewController {
         }
 
     }
- 
-    var indicator = UIActivityIndicatorView()
     
-    private var storyProperties = [StoryProperty]()
     public var currentViewingStoryIndex = 0
     private var storyImageIndex = 0
     public var igStories: IGStories!
@@ -139,7 +136,7 @@ class StoryFullScreenViewer: UIViewController {
             switch gestureRecognizer.direction {
             case .left:
             print("swiped left")
-                if currentViewingStoryIndex < storyProperties.count {
+                if currentViewingStoryIndex < stories.count {
                     self.storyImageIndex = 0
                     self.timerProgressStartAt = 0.0
                     currentViewingStoryIndex += 1
@@ -200,7 +197,6 @@ class StoryFullScreenViewer: UIViewController {
         
         let storyImages = stories[currentViewingStoryIndex].snaps!
         if let singleStoryImage = storyImages.first?.url{
-        indicator.color = .red
         self.storyImageView.kf.indicatorType = .activity
         self.storyImageView.kf.setImage(with: URL(string: singleStoryImage), placeholder: nil , options: nil) { (_) in
             
