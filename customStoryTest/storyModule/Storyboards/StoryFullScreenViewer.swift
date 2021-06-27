@@ -121,13 +121,7 @@ class StoryFullScreenViewer: UIViewController {
         self.storyImageIndex = 0
         self.visualEffectViewHolder.alpha = 1.0
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
-           swipeRight.direction = .right
-           self.view.addGestureRecognizer(swipeRight)
 
-           let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
-        swipeLeft.direction = .left
-           self.view.addGestureRecognizer(swipeLeft)
     }
     
     @IBAction func respondToSwipeGesture(_ gestureRecognizer : UISwipeGestureRecognizer) {
@@ -136,7 +130,7 @@ class StoryFullScreenViewer: UIViewController {
             switch gestureRecognizer.direction {
             case .left:
             print("swiped left")
-                if currentViewingStoryIndex < stories.count {
+                if currentViewingStoryIndex < stories.count - 1 {
                     self.storyImageIndex = 0
                     self.timerProgressStartAt = 0.0
                     currentViewingStoryIndex += 1
@@ -171,10 +165,18 @@ class StoryFullScreenViewer: UIViewController {
     
     private func setupViewDidLoad() {
         self.stories = igStories.stories
-        self.avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width * 0.15
+        self.avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width * 0.50
         self.storyImageView.layer.cornerRadius = 20.0
         self.storyImageView.backgroundColor = .black
         self.progressRate = automaticDissappearAfterSeconds/1000
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+           swipeRight.direction = .right
+           self.view.addGestureRecognizer(swipeRight)
+
+           let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeLeft.direction = .left
+           self.view.addGestureRecognizer(swipeLeft)
        
         
     }
@@ -203,6 +205,7 @@ class StoryFullScreenViewer: UIViewController {
         }
         }
         let avatarImageLink = stories[currentViewingStoryIndex].user.picture
+        print("avatar image: ", avatarImageLink)
         self.storyImageView.kf.indicatorType = .activity
         self.avatarImageView.kf.setImage(with: URL(string: avatarImageLink), placeholder:  nil , options: nil) { (_) in
             
