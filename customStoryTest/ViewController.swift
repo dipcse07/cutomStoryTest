@@ -7,14 +7,8 @@
 
 import UIKit
 
-class ViewController: UIViewController, FullScreenSotryDelegate {
-    func currentStory(story: IGStory) {
-        print("this is printing from the delegate")
-    }
-    func profileImageTapped(userInfo: IGUser) {
-        print("current userName: ", userInfo.name)
-        print("current userProfileImage: ", userInfo.picture)
-    }
+class ViewController: UIViewController {
+    
     
 
 //    private let storyFullScreenViewer = UIStoryboard(name: "StoryView", bundle: nil).instantiateViewController(identifier: "StoryFullScreenViewer") as! StoryFullScreenViewer
@@ -46,3 +40,17 @@ class ViewController: UIViewController, FullScreenSotryDelegate {
     }
 }
 
+
+extension ViewController: FullScreenSotryDelegate {
+    func currentStory(story: IGStory) {
+        print("this is printing from the delegate")
+    }
+    func profileImageTapped(userInfo: IGUser) {
+        print("current userName: ", userInfo.name)
+        print("current userProfileImage: ", userInfo.picture)
+    }
+    
+    func storiesClosed() {
+        print("stories Closed")
+    }
+}

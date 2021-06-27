@@ -280,6 +280,7 @@ class StoryFullScreenViewer: UIViewController {
     
     
     @objc func closeButtonAction() {
+        fullScreenStoryDelegate.storiesClosed()
         self.dismiss(animated: true, completion: nil)
     }
     
