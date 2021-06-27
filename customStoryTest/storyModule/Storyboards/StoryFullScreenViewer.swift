@@ -40,12 +40,14 @@ class StoryFullScreenViewer: UIViewController {
         }
 
     }
+ 
+    var indicator = UIActivityIndicatorView()
     
     private var storyProperties = [StoryProperty]()
     public var currentViewingStoryIndex = 0
     private var storyImageIndex = 0
-    public var stories: IGStories!
-    var storyArray = [Story]()
+    public var igStories: IGStories!
+    private var stories = [IGStory]()
     
 //    var storyImageSrc = ""
 //    var avatarImageSrc = ""
@@ -58,38 +60,54 @@ class StoryFullScreenViewer: UIViewController {
     public var showBlurEffectOnFullScreenView = true
     private let pangestureVelocity:CGFloat = 1000
     
-    public func populateStoryProperties(stories: IGStories){
-        let totalStories = stories.stories
-        storyProperties.removeAll()
-        for eachStory in totalStories {
-            let avatar = eachStory.user.picture
-        
-          let userName = eachStory.user.name
-            let lastUpdate = eachStory.lastUpdated
-            
-            if let snaps = eachStory.snaps {
-                storyArray.removeAll()
-                for eachSnap in snaps {
-                    let imageUrl = eachSnap.url
-                    let story = Story(image: imageUrl)
-                    storyArray.append(story)
-                }
-               
-                
-               // print(storyProperty)
-            }
-            let storyProperty = StoryProperty(last_updated: lastUpdate, title: userName, avatar: avatar, story: storyArray)
-            self.storyProperties.append(storyProperty)
-            print("story properties from populates storyFunction: \n", storyProperties.debugDescription)
-        }
+//    public func populateStoryProperties(stories: IGStories){
+//        let totalStories = stories.stories
+//        storyProperties.removeAll()
+//        for eachStory in totalStories {
+//            let avatar = eachStory.user.picture
+//
+//          let userName = eachStory.user.name
+//            let lastUpdate = eachStory.lastUpdated
+//
+//            if let snaps = eachStory.snaps {
+//                storyArray.removeAll()
+//                for eachSnap in snaps {
+//                    let imageUrl = eachSnap.url
+//                    let story = Story(image: imageUrl)
+//                    storyArray.append(story)
+//                }
+//
+//
+//               // print(storyProperty)
+//            }
+//            let storyProperty = StoryProperty(last_updated: lastUpdate, title: userName, avatar: avatar, story: storyArray)
+//            self.storyProperties.append(storyProperty)
+//            print("story properties from populates storyFunction: \n", storyProperties.debugDescription)
+//        }
+//    }
+
+//    init(stories: IGStories,handPickedStoryIndex: Int) {
+//
+//        self.stories = stories
+//        self.currentViewingStoryIndex = handPickedStoryIndex
+//        super.init(nibName: "StoryFullScreenViewer", bundle: nil)
+//    }
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+
+    internal static func instantiate(with stories: IGStories, handPickedStoryIndex: Int) -> StoryFullScreenViewer {
+
+        let vc = UIStoryboard(name: "StoryView", bundle: nil).instantiateViewController(withIdentifier: "StoryFullScreenViewer") as! StoryFullScreenViewer
+        vc.igStories = stories
+        return vc
     }
-
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.setupViewDidLoad()
-        
+       
     }
     
     
@@ -155,6 +173,7 @@ class StoryFullScreenViewer: UIViewController {
     
     
     private func setupViewDidLoad() {
+        self.stories = igStories.stories
         self.avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width * 0.15
         self.storyImageView.layer.cornerRadius = 20.0
         self.storyImageView.backgroundColor = .black
@@ -177,20 +196,22 @@ class StoryFullScreenViewer: UIViewController {
         self.topTitleLabel.transform = .init(scaleX: 1, y: 0.85)
         
 
-        self.topTitleLabel.text = self.storyProperties[currentViewingStoryIndex].title
+        self.topTitleLabel.text = stories[currentViewingStoryIndex].user.name
         
-        let storyImages = self.storyProperties[currentViewingStoryIndex].story
-        let singleStoryImage = storyImages[0].image
+        let storyImages = stories[currentViewingStoryIndex].snaps!
+        if let singleStoryImage = storyImages.first?.url{
+        indicator.color = .red
         self.storyImageView.kf.indicatorType = .activity
         self.storyImageView.kf.setImage(with: URL(string: singleStoryImage), placeholder: nil , options: nil) { (_) in
             
         }
-        let avatarImageLink = self.storyProperties[currentViewingStoryIndex].avatar
-        self.avatarImageView.kf.indicatorType = .activity
+        }
+        let avatarImageLink = stories[currentViewingStoryIndex].user.picture
+        self.storyImageView.kf.indicatorType = .activity
         self.avatarImageView.kf.setImage(with: URL(string: avatarImageLink), placeholder:  nil , options: nil) { (_) in
             
         }
-        self.timeLabel.text = self.storyProperties[currentViewingStoryIndex].last_updated
+        self.timeLabel.text = stories[currentViewingStoryIndex].lastUpdated
         
         
         
@@ -198,7 +219,7 @@ class StoryFullScreenViewer: UIViewController {
             self.leftIconImageView.isHidden = true
             self.rightIconImageView.isHidden = false
         }
-        else if currentViewingStoryIndex == storyProperties.count - 1 {
+        else if currentViewingStoryIndex == stories.count - 1 {
             self.leftIconImageView.isHidden = false
             self.rightIconImageView.isHidden = true
         }
@@ -254,7 +275,7 @@ class StoryFullScreenViewer: UIViewController {
         
         
         //stackView.translatesAutoresizingMaskIntoConstraints = false
-        let storiyImages = self.storyProperties[currentViewingStoryIndex].story
+        let storiyImages = stories[currentViewingStoryIndex].snaps!
         
         for _ in 0..<storiyImages.count {
             let progressView = UIProgressView()
@@ -271,8 +292,8 @@ class StoryFullScreenViewer: UIViewController {
     
     
     private func updateStoryImages(index: Int) {
-        let storiyImages = self.storyProperties[currentViewingStoryIndex].story
-        let storyImageLink = storiyImages[index].image
+        let storiyImages = stories[currentViewingStoryIndex].snaps!
+        let storyImageLink = storiyImages[index].url
         self.storyImageView.kf.setImage(with: URL(string: storyImageLink), placeholder:  nil , options: nil) { (_) in
             
         }
@@ -287,9 +308,9 @@ class StoryFullScreenViewer: UIViewController {
     
     @objc func nextAction() {
         
-        let imagesInCurrentStory = storyProperties[currentViewingStoryIndex].story
+        let imagesInCurrentStory = stories[currentViewingStoryIndex].snaps!
         
-        if self.currentViewingStoryIndex < storyProperties.count-1 {
+        if self.currentViewingStoryIndex < stories.count-1 {
 
             
             if self.storyImageIndex < imagesInCurrentStory.count-1 {
@@ -388,7 +409,7 @@ class StoryFullScreenViewer: UIViewController {
         //self.countLabel.text = "\(currentViewingStoryIndex+1)\n\(storyImageIndex+1)"
         if timerProgressStartAt > 1.0 {
             //self.closeButtonAction()
-            let imagesInCurrentStory = storyProperties[currentViewingStoryIndex].story
+            let imagesInCurrentStory = stories[currentViewingStoryIndex].snaps!
             
             if self.storyImageIndex < imagesInCurrentStory.count-1 {
 

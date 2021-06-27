@@ -9,17 +9,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    private let storyFullScreenViewer = UIStoryboard(name: "StoryView", bundle: nil).instantiateViewController(identifier: "StoryFullScreenViewer") as! StoryFullScreenViewer
+//    private let storyFullScreenViewer = UIStoryboard(name: "StoryView", bundle: nil).instantiateViewController(identifier: "StoryFullScreenViewer") as! StoryFullScreenViewer
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         fetchStories()
     }
-    func passStories(stories:IGStories){
-        storyFullScreenViewer.populateStoryProperties(stories: stories)
-        self.present(storyFullScreenViewer, animated: true, completion: nil)
-    }
+  
 
     func fetchStories() {
         Api.shared.getStories(withPageNo: 1, pageSize: 100){ (success,error,stories) in
@@ -30,7 +27,8 @@ class ViewController: UIViewController {
                         print(stories.stories.debugDescription)
 
                       //  print("printing the igStories passed in storyView \n", self.storyView.igStories.stories.count)
-                        passStories(stories: stories)
+                        let fullStoryVC = StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0)
+                        self.present(fullStoryVC, animated: true, completion: nil)
                     print(error)
                 }
                     
