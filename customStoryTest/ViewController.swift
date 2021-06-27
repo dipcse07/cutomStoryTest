@@ -7,7 +7,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, FullScreenSotryDelegate {
+    func currentStory(story: IGStory) {
+        print("this is printing from the delegate")
+    }
+    
 
 //    private let storyFullScreenViewer = UIStoryboard(name: "StoryView", bundle: nil).instantiateViewController(identifier: "StoryFullScreenViewer") as! StoryFullScreenViewer
     
@@ -27,7 +31,7 @@ class ViewController: UIViewController {
                         print(stories.stories.debugDescription)
 
                       //  print("printing the igStories passed in storyView \n", self.storyView.igStories.stories.count)
-                        let fullStoryVC = StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0)
+                        let fullStoryVC = StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)
                         self.present(fullStoryVC, animated: true, completion: nil)
                     print(error)
                 }

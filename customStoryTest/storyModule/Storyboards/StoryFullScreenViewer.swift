@@ -45,10 +45,7 @@ class StoryFullScreenViewer: UIViewController {
     private var storyImageIndex = 0
     public var igStories: IGStories!
     private var stories = [IGStory]()
-    
-//    var storyImageSrc = ""
-//    var avatarImageSrc = ""
-//    var topTitleText = ""
+
     private var progressTimer = Timer()
     private var automaticDissappearAfterSeconds = 5.0
     private var timerProgressStartAt = 0.0
@@ -56,47 +53,14 @@ class StoryFullScreenViewer: UIViewController {
     private var topProgressViews = [UIProgressView]()
     public var showBlurEffectOnFullScreenView = true
     private let pangestureVelocity:CGFloat = 1000
+    var fullScreenStoryDelegate: FullScreenSotryDelegate!
     
-//    public func populateStoryProperties(stories: IGStories){
-//        let totalStories = stories.stories
-//        storyProperties.removeAll()
-//        for eachStory in totalStories {
-//            let avatar = eachStory.user.picture
-//
-//          let userName = eachStory.user.name
-//            let lastUpdate = eachStory.lastUpdated
-//
-//            if let snaps = eachStory.snaps {
-//                storyArray.removeAll()
-//                for eachSnap in snaps {
-//                    let imageUrl = eachSnap.url
-//                    let story = Story(image: imageUrl)
-//                    storyArray.append(story)
-//                }
-//
-//
-//               // print(storyProperty)
-//            }
-//            let storyProperty = StoryProperty(last_updated: lastUpdate, title: userName, avatar: avatar, story: storyArray)
-//            self.storyProperties.append(storyProperty)
-//            print("story properties from populates storyFunction: \n", storyProperties.debugDescription)
-//        }
-//    }
-
-//    init(stories: IGStories,handPickedStoryIndex: Int) {
-//
-//        self.stories = stories
-//        self.currentViewingStoryIndex = handPickedStoryIndex
-//        super.init(nibName: "StoryFullScreenViewer", bundle: nil)
-//    }
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-
-    internal static func instantiate(with stories: IGStories, handPickedStoryIndex: Int) -> StoryFullScreenViewer {
+    internal static func instantiate(with stories: IGStories, handPickedStoryIndex: Int, delegate:FullScreenSotryDelegate) -> StoryFullScreenViewer {
 
         let vc = UIStoryboard(name: "StoryView", bundle: nil).instantiateViewController(withIdentifier: "StoryFullScreenViewer") as! StoryFullScreenViewer
         vc.igStories = stories
+        vc.fullScreenStoryDelegate = delegate
+        
         return vc
     }
     
@@ -293,6 +257,7 @@ class StoryFullScreenViewer: UIViewController {
     private func updateStoryImages(index: Int) {
         let storiyImages = stories[currentViewingStoryIndex].snaps!
         let storyImageLink = storiyImages[index].url
+        fullScreenStoryDelegate.currentStory(story: stories[currentViewingStoryIndex])
         self.storyImageView.kf.setImage(with: URL(string: storyImageLink), placeholder:  nil , options: nil) { (_) in
             
         }
