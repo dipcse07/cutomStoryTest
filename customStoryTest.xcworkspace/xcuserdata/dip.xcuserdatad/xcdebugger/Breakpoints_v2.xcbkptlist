@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "11DD9E91-E1E1-40DD-A593-D02E97043038"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "211641A2-F172-4D2D-91F9-058A45644FA4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "customStoryTest/storyModule/Storyboards/StoryFullScreenViewer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
+            landmarkName = "setupViewWillAppear()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "211641A2-F172-4D2D-91F9-058A45644FA4 - 2d35573726795cf8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "customStoryTest.StoryFullScreenViewer.setupViewWillAppear() -&gt; ()"
+                  moduleName = "customStoryTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MYMACHDD/XcodeTutoProjects/customStoryTest/customStoryTest/storyModule/Storyboards/StoryFullScreenViewer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "190"
+                  endingLineNumber = "190"
+                  offsetFromSymbolStart = "3944">
+               </Location>
+               <Location
+                  uuid = "211641A2-F172-4D2D-91F9-058A45644FA4 - d13096994f1349e9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Result&lt;Kingfisher.RetrieveImageResult, Kingfisher.KingfisherError&gt;) -&gt; () in customStoryTest.StoryFullScreenViewer.setupViewWillAppear() -&gt; ()"
+                  moduleName = "customStoryTest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/MYMACHDD/XcodeTutoProjects/customStoryTest/customStoryTest/storyModule/Storyboards/StoryFullScreenViewer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "192"
+                  endingLineNumber = "192"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

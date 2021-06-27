@@ -1,0 +1,6 @@
+framework module Pods_customStoryTest {
+  umbrella header "Pods-customStoryTest-umbrella.h"
+
+  export *
+  module * { export * }
+}
