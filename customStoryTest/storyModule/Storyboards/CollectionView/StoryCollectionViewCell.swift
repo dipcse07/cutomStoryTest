@@ -19,38 +19,41 @@ class StoryCollectionViewCell: UICollectionViewCell {
         
     }
     
-//    @IBOutlet var closeButton: UIButton! {
-//        didSet {
-//            self.closeButton.addTarget(self, action: #selector(closeButtonAction), for: .touchUpInside)
-//        }
-//    }
+    @IBOutlet var closeButton: UIButton! {
+        didSet {
+            self.closeButton.addTarget(self, action: #selector(closeButtonAction), for: .touchUpInside)
+        }
+    }
     
     @IBOutlet weak var view: UIView!
     
+    @IBOutlet var progressViewHolder: UIView!
+    
     @IBOutlet var topTitleLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    
     @IBOutlet var storyImageView: UIImageView!
     @IBOutlet var avatarImageView: UIImageView!
     @IBOutlet var leftIconImageView: UIImageView!
     @IBOutlet var rightIconImageView: UIImageView!
-    @IBOutlet var progressViewHolder: UIView!
+
     @IBOutlet var countLabel: UILabel!
-    @IBOutlet var visualEffectView: UIVisualEffectView!
-    @IBOutlet var visualEffectViewHolder: UIView!
-    @IBOutlet weak var timeLabel: UILabel!
+
+
     
 
-//
-//    @IBOutlet var nextButton: UIButton! {
-//        didSet {
-//            self.nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
-//        }
-//    }
-//    @IBOutlet var prevButton: UIButton! {
-//        didSet {
-//            self.prevButton.addTarget(self, action: #selector(prevAction), for: .touchUpInside)
-//        }
-//
-//    }
+
+    @IBOutlet var nextButton: UIButton! {
+        didSet {
+            self.nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
+        }
+    }
+    @IBOutlet var prevButton: UIButton! {
+        didSet {
+            self.prevButton.addTarget(self, action: #selector(prevAction), for: .touchUpInside)
+        }
+
+    }
     
     public var currentViewingStoryIndex = 0
     private var storyImageIndex = 0
@@ -171,13 +174,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
 
     private func setupViewWillAppear() {
 
-        if showBlurEffectOnFullScreenView {
-            self.initBlurEffect()
-        }
-        else {
-            self.visualEffectViewHolder.alpha = 0.0
-        }
-
         self.avatarImageView.transform = .init(scaleX: 0.50, y: 0.50)
         self.topTitleLabel.transform = .init(scaleX: 1, y: 0.85)
 
@@ -232,17 +228,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
 
     }
 
-
-
-    private func initBlurEffect() {
-        //self.visualEffectViewHolder.alpha = 1.0
-        DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
-            UIView.animate(withDuration: 0.4) {
-                self.visualEffectViewHolder.alpha = 0.0
-            }
-        }
-
-    }
 
     private func initProgressViews() {
 

@@ -176,6 +176,17 @@
             </constraints>
             <size key="customSize" width="255" height="421"/>
             <connections>
+                <outlet property="avatarImageView" destination="3Dl-Jz-2J8" id="SJi-3P-JZd"/>
+                <outlet property="closeButton" destination="bto-NO-LGP" id="VPW-6h-AqH"/>
+                <outlet property="countLabel" destination="0U6-N9-HQs" id="zDN-Gc-i0L"/>
+                <outlet property="leftIconImageView" destination="fxq-Tn-iBN" id="IN1-Vl-f3O"/>
+                <outlet property="nextButton" destination="gpq-GY-K4F" id="XiB-0N-jcv"/>
+                <outlet property="prevButton" destination="ArW-Uu-QaQ" id="czs-UN-ck4"/>
+                <outlet property="progressViewHolder" destination="uvS-Ww-AX3" id="jEO-b5-vsF"/>
+                <outlet property="rightIconImageView" destination="coo-d7-Ber" id="dX1-Nj-L80"/>
+                <outlet property="storyImageView" destination="pdl-Ft-Bvv" id="axZ-C4-ibI"/>
+                <outlet property="timeLabel" destination="QG7-r6-bL9" id="Q1G-3e-VdN"/>
+                <outlet property="topTitleLabel" destination="smY-3m-Vzg" id="7Jg-ml-sAE"/>
                 <outlet property="view" destination="sRg-zU-meK" id="wTF-XU-Mea"/>
             </connections>
             <point key="canvasLocation" x="134.78260869565219" y="169.08482142857142"/>
