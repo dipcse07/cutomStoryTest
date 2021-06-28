@@ -270,7 +270,7 @@ class StoryFullScreenViewer: UIViewController {
     private func updateStoryImages(index: Int) {
         let storiyImages = stories[currentViewingStoryIndex].snaps!
         let storyImageLink = storiyImages[index].url
-        fullScreenStoryDelegate.currentStoryAndSnap(story: stories[currentViewingStoryIndex])
+        fullScreenStoryDelegate.currentStoryAndSnap(story: stories[index], snap: storiyImages[index])
         self.storyImageView.kf.setImage(with: URL(string: storyImageLink), placeholder:  nil , options: nil) { (_) in
             
         }

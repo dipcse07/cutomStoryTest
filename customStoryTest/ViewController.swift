@@ -26,7 +26,7 @@ class ViewController: UIViewController {
                     if let stories = stories, stories.count > 0 {
                         print(stories.stories.debugDescription)
                         
-                        let fullStoryVC = StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)
+                        let fullStoryVC = StoryCollectionViewController.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)//StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)
                         self.present(fullStoryVC, animated: true, completion: nil)
                     print(error)
                 }
@@ -45,7 +45,7 @@ extension ViewController: FullScreenSotryDelegate {
         
     }
     
-    func currentStoryAndSnap(story: IGStory?) {
+    func currentStoryAndSnap(story: IGStory?, snap:IGSnap?) {
         print("this is printing from the delegate", story?.lastUpdated)
     }
     func profileImageTapped(userInfo: IGUser?) {

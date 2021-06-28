@@ -9,20 +9,21 @@ import UIKit
 
 class StoryCollectionViewController: UIViewController{
     
+    var onceOnly = false
     
-    internal static func instantiate(with stories: IGStories, handPickedStoryIndex: Int, delegate:FullScreenSotryDelegate) -> StoryFullScreenViewer {
+    internal static func instantiate(with stories: IGStories, handPickedStoryIndex: Int, delegate:FullScreenSotryDelegate) -> StoryCollectionViewController {
 
         let vc = UIStoryboard(name: "StoryView", bundle: nil).instantiateViewController(withIdentifier: "StoryCollectionViewController") as! StoryCollectionViewController
         vc.igStories = stories
-        vc.fullScreenStoryDelegate = delegate
+        vc.delegate = delegate
+        vc.storyIndex = handPickedStoryIndex
         
         return vc
     }
-    
+    var igStories: IGStories!
     var delegate: FullScreenSotryDelegate?
-    
-    var snaps = [Snap]()
-    var stories = [Story]()
+    var storyIndex: Int!
+    var stories = [IGStory]()
     
     @IBOutlet weak var storyCollectionView: UICollectionView!
     
@@ -35,17 +36,18 @@ class StoryCollectionViewController: UIViewController{
         storyCollectionView.dataSource = self
         storyCollectionView.delegate = self
         storyCollectionView.register(UINib(nibName: "StoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "StoryCollectionViewCell")
-        populateStories()
+       // populateStories()
+        self.stories = self.igStories.stories
     }
     
-    func populateStories (){
-       
-        snaps = [Snap(image: UIImage(named: "1")!),Snap(image: UIImage(named: "2")!)]
-        stories.append(Story(snaps: snaps))
-        snaps = [Snap(image: UIImage(named: "3")!),Snap(image: UIImage(named: "1")!)]
-        stories.append(Story(snaps: snaps))
-    }
-    
+//    func populateStories (){
+//
+//        snaps = [Snap(image: UIImage(named: "1")!),Snap(image: UIImage(named: "2")!)]
+//        stories.append(Story(snaps: snaps))
+//        snaps = [Snap(image: UIImage(named: "3")!),Snap(image: UIImage(named: "1")!)]
+//        stories.append(Story(snaps: snaps))
+//    }
+//
 
     /*
     // MARK: - Navigation
@@ -93,6 +95,14 @@ extension StoryCollectionViewController:  UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if !onceOnly {
+              let indexToScrollTo = IndexPath(item: 0 , section: storyIndex)
+              self.storyCollectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
+              onceOnly = true
+            }
+    }
+    
 }
 
 
@@ -126,6 +136,7 @@ extension StoryCollectionViewController: FullScreenSotryDelegate{
     func storiesClosed() {
        // self.dismiss(animated: true, completion: nil)
         print("from collection viewController close button tapped")
+        self.dismiss(animated: true, completion:nil)
     }
     
     func nextStory() {

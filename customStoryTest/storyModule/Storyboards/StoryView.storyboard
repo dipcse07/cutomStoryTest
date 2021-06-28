@@ -189,7 +189,7 @@
         <!--Story Collection View Controller-->
         <scene sceneID="MXV-1a-mdO">
             <objects>
-                <viewController storyboardIdentifier="StoryCollectionViewController" id="DY0-9q-74s" customClass="StoryCollectionViewController" customModule="customStoryTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StoryCollectionViewController" modalPresentationStyle="fullScreen" id="DY0-9q-74s" customClass="StoryCollectionViewController" customModule="customStoryTest" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FmG-S0-vR5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
