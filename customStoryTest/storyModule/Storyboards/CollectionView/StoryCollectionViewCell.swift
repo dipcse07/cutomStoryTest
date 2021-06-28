@@ -17,13 +17,11 @@ class StoryCollectionViewCell: UICollectionViewCell {
     }
     public var stories: IGStory! {
         didSet{
+            print(stories.debugDescription)
+            print(stories.snaps?.count)
             self.setupViewDidLoad()
              self.setupViewWillAppear()
         }
-    }
-    
-    override func prepareForReuse() {
-        
     }
     
     @IBOutlet var closeButton: UIButton! {
@@ -87,16 +85,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
         return vc
     }
 
-
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(true)
-//        self.progressTimer.invalidate()
-//        self.currentViewingStoryIndex = 0
-//        self.storyImageIndex = 0
-//        self.visualEffectViewHolder.alpha = 1.0
-//
-//
-//    }
 
     @IBAction func respondToSwipeGesture(_ gestureRecognizer : UISwipeGestureRecognizer) {
         if gestureRecognizer.state == .ended {
@@ -332,14 +320,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
     @objc func prevAction() {
 
         if self.currentViewingStoryIndex > 0 {
-//            self.storyImageIndex = 0
-//            currentViewingStoryIndex -= 1
-//            UIView.animate(withDuration: 0.2) {
-//                self.setupViewWillAppear()
-//            }
-
-
-//            let imagesInCurrentStory = storyProperties[currentViewingStoryIndex].story
             if self.storyImageIndex > 0 {
 
 

@@ -72,8 +72,10 @@ class StoryCollectionViewController: UIViewController{
                 }
                 else{
                     let indexPath1: IndexPath?
-                    indexPath1 = IndexPath.init(row: 0, section: (indexPath?.section)!)
-                    coll.scrollToItem(at: indexPath1!, at: .left, animated: true)
+//                    indexPath1 = IndexPath.init(row: 0, section: (indexPath?.section)!)
+//                    coll.scrollToItem(at: indexPath1!, at: .left, animated: true)
+                    
+                    self.dismiss(animated: true, completion: nil)
                 }
                 
             }
