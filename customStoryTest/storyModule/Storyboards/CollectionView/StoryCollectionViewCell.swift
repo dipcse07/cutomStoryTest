@@ -15,6 +15,13 @@ class StoryCollectionViewCell: UICollectionViewCell {
        // self.setupViewDidLoad()
         //self.setupViewWillAppear()
     }
+    public var stories: Story! {
+        didSet{
+            self.setupViewDidLoad()
+             self.setupViewWillAppear()
+        }
+    }
+    
     override func prepareForReuse() {
         
     }
@@ -58,7 +65,9 @@ class StoryCollectionViewCell: UICollectionViewCell {
     public var currentViewingStoryIndex = 0
     private var storyImageIndex = 0
     public var igStories: IGStories!
-    private var stories = [IGStory]()
+  //  private var stories = [IGStory]()
+    
+    
 
     private var progressTimer = Timer()
     private var automaticDissappearAfterSeconds = 5.0
@@ -67,7 +76,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
     private var topProgressViews = [UIProgressView]()
     public var showBlurEffectOnFullScreenView = true
     private let pangestureVelocity:CGFloat = 1000
-    var fullScreenStoryDelegate: FullScreenSotryDelegate!
+    var fullScreenStoryDelegateForCell: FullScreenSotryDelegate!
     
     internal static func instantiate(with stories: IGStories, handPickedStoryIndex: Int, delegate:FullScreenSotryDelegate) -> StoryFullScreenViewer {
 
@@ -107,7 +116,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
             switch gestureRecognizer.direction {
             case .left:
             print("swiped left")
-                if currentViewingStoryIndex < stories.count - 1 {
+                if currentViewingStoryIndex < stories.snaps.count - 1 {
                     self.storyImageIndex = 0
                     self.timerProgressStartAt = 0.0
                     currentViewingStoryIndex += 1
@@ -141,7 +150,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
 
 
     private func setupViewDidLoad() {
-        self.stories = igStories.stories
+        //self.stories = igStories.stories
         self.avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width * 0.50
         self.storyImageView.layer.cornerRadius = 20.0
         self.storyImageView.backgroundColor = .black
@@ -165,8 +174,9 @@ class StoryCollectionViewCell: UICollectionViewCell {
         let tappedImage = tapGestureRecognizer.view as! UIImageView
 
         // Your action
-        let currentUserInfo = stories[currentViewingStoryIndex].user
-        fullScreenStoryDelegate.profileImageTapped(userInfo: currentUserInfo)
+        let currentUserInfo = "UserInfo"
+        print("tapped on Current User Info")
+       fullScreenStoryDelegateForCell.profileImageTapped(userInfo: nil)
 
 
     }
@@ -178,22 +188,23 @@ class StoryCollectionViewCell: UICollectionViewCell {
         self.topTitleLabel.transform = .init(scaleX: 1, y: 0.85)
 
 
-        self.topTitleLabel.text = stories[currentViewingStoryIndex].user.name
+        self.topTitleLabel.text = "Sazid"//stories[currentViewingStoryIndex].user.name
 
-        let storyImages = stories[currentViewingStoryIndex].snaps!
-        if let singleStoryImage = storyImages.first?.url{
-        self.storyImageView.kf.indicatorType = .activity
-        self.storyImageView.kf.setImage(with: URL(string: singleStoryImage), placeholder: nil , options: nil) { (_) in
-
-        }
-        }
-        let avatarImageLink = stories[currentViewingStoryIndex].user.picture
-        print("avatar image: ", avatarImageLink)
-        self.storyImageView.kf.indicatorType = .activity
-        self.avatarImageView.kf.setImage(with: URL(string: avatarImageLink), placeholder:  nil , options: nil) { (_) in
-
-        }
-        self.timeLabel.text = stories[currentViewingStoryIndex].lastUpdated
+        let storyImages = stories.snaps
+        self.storyImageView.image = storyImages.first?.image
+//        if let singleStoryImage = storyImages.first?.url{
+//        self.storyImageView.kf.indicatorType = .activity
+//        self.storyImageView.kf.setImage(with: URL(string: singleStoryImage), placeholder: nil , options: nil) { (_) in
+//
+//        }
+//        }
+//        let avatarImageLink = stories[currentViewingStoryIndex].user.picture
+//        print("avatar image: ", avatarImageLink)
+//        self.storyImageView.kf.indicatorType = .activity
+//        self.avatarImageView.kf.setImage(with: URL(string: avatarImageLink), placeholder:  nil , options: nil) { (_) in
+//
+//        }
+//        self.timeLabel.text = stories[currentViewingStoryIndex].lastUpdated
 
 
 
@@ -201,7 +212,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
             self.leftIconImageView.isHidden = true
             self.rightIconImageView.isHidden = false
         }
-        else if currentViewingStoryIndex == stories.count - 1 {
+        else if currentViewingStoryIndex == stories.snaps.count - 1 {
             self.leftIconImageView.isHidden = false
             self.rightIconImageView.isHidden = true
         }
@@ -246,7 +257,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
 
 
         //stackView.translatesAutoresizingMaskIntoConstraints = false
-        let storiyImages = stories[currentViewingStoryIndex].snaps!
+        let storiyImages = stories.snaps
 
         for _ in 0..<storiyImages.count {
             let progressView = UIProgressView()
@@ -263,27 +274,29 @@ class StoryCollectionViewCell: UICollectionViewCell {
 
 
     private func updateStoryImages(index: Int) {
-        let storiyImages = stories[currentViewingStoryIndex].snaps!
-        let storyImageLink = storiyImages[index].url
-        fullScreenStoryDelegate.currentStory(story: stories[currentViewingStoryIndex])
-        self.storyImageView.kf.setImage(with: URL(string: storyImageLink), placeholder:  nil , options: nil) { (_) in
-
-        }
+        let storiyImages = stories.snaps
+        let storyImageLink = storiyImages[index].image
+        self.storyImageView.image = storyImageLink
+//        fullScreenStoryDelegate.currentStory(story: stories[currentViewingStoryIndex])
+//        self.storyImageView.kf.setImage(with: URL(string: storyImageLink), placeholder:  nil , options: nil) { (_) in
+//
+//        }
     }
 
 
 
 
     @objc func closeButtonAction() {
-        fullScreenStoryDelegate.storiesClosed()
+        self.progressTimer.invalidate()
+        fullScreenStoryDelegateForCell.storiesClosed()
         
     }
 
     @objc func nextAction() {
 
-        let imagesInCurrentStory = stories[currentViewingStoryIndex].snaps!
+        let imagesInCurrentStory = stories.snaps
 
-        if self.currentViewingStoryIndex < stories.count-1 {
+        if self.currentViewingStoryIndex < stories.snaps.count-1 {
 
 
             if self.storyImageIndex < imagesInCurrentStory.count-1 {
@@ -315,7 +328,10 @@ class StoryCollectionViewCell: UICollectionViewCell {
 
             }
             else {
-                self.closeButtonAction()
+                currentViewingStoryIndex = 0
+                self.progressTimer.invalidate()
+                fullScreenStoryDelegateForCell.nextStory()
+                
             }
 
         }
@@ -382,7 +398,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
         //self.countLabel.text = "\(currentViewingStoryIndex+1)\n\(storyImageIndex+1)"
         if timerProgressStartAt > 1.0 {
             //self.closeButtonAction()
-            let imagesInCurrentStory = stories[currentViewingStoryIndex].snaps!
+            let imagesInCurrentStory = stories.snaps
 
             if self.storyImageIndex < imagesInCurrentStory.count-1 {
 

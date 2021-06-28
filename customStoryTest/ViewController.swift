@@ -39,12 +39,18 @@ class ViewController: UIViewController {
 
 
 extension ViewController: FullScreenSotryDelegate {
-    func currentStory(story: IGStory) {
-        print("this is printing from the delegate", story.lastUpdated)
+
+    
+    func nextStory() {
+        
     }
-    func profileImageTapped(userInfo: IGUser) {
-        print("current userName: ", userInfo.name)
-        print("current userProfileImage: ", userInfo.picture)
+    
+    func currentStoryAndSnap(story: IGStory?) {
+        print("this is printing from the delegate", story?.lastUpdated)
+    }
+    func profileImageTapped(userInfo: IGUser?) {
+        print("current userName: ", userInfo?.name)
+        print("current userProfileImage: ", userInfo?.picture)
     }
     
     func storiesClosed() {

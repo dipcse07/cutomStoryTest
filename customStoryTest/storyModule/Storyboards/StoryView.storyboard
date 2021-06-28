@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -185,8 +186,48 @@
             </objects>
             <point key="canvasLocation" x="-607.24637681159425" y="-754.01785714285711"/>
         </scene>
+        <!--Story Collection View Controller-->
+        <scene sceneID="MXV-1a-mdO">
+            <objects>
+                <viewController storyboardIdentifier="StoryCollectionViewController" id="DY0-9q-74s" customClass="StoryCollectionViewController" customModule="customStoryTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FmG-S0-vR5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="m9n-sa-qML">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" red="0.31372549020000001" green="0.68235294120000001" blue="0.48627450979999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Jw4-tL-lTw">
+                                    <size key="itemSize" width="414" height="921"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="WA6-Eq-Snf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="m9n-sa-qML" firstAttribute="trailing" secondItem="WA6-Eq-Snf" secondAttribute="trailing" id="0N4-u5-9Z8"/>
+                            <constraint firstItem="m9n-sa-qML" firstAttribute="top" secondItem="FmG-S0-vR5" secondAttribute="top" id="Tow-SF-lVc"/>
+                            <constraint firstAttribute="bottom" secondItem="m9n-sa-qML" secondAttribute="bottom" id="rP1-9m-iaf"/>
+                            <constraint firstItem="m9n-sa-qML" firstAttribute="leading" secondItem="WA6-Eq-Snf" secondAttribute="leading" id="sZy-YR-LAM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="storyCollectionView" destination="m9n-sa-qML" id="NrT-K4-yg5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GLb-ZX-fQd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="628.98550724637687" y="28.794642857142854"/>
+        </scene>
     </scenes>
     <resources>
         <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

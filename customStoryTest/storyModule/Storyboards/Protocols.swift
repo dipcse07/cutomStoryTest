@@ -7,7 +7,8 @@
 
 import Foundation
 protocol FullScreenSotryDelegate {
-    func currentStory(story: IGStory)
-    func profileImageTapped(userInfo: IGUser)
+    func currentStoryAndSnap(story: IGStory?, snap: IGSnap?)
+    func profileImageTapped(userInfo: IGUser?)
     func storiesClosed()
+    func nextStory()
 }
