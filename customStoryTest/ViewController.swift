@@ -25,8 +25,7 @@ class ViewController: UIViewController {
                 if success {
                     if let stories = stories, stories.count > 0 {
                         print(stories.stories.debugDescription)
-
-                      //  print("printing the igStories passed in storyView \n", self.storyView.igStories.stories.count)
+                        
                         let fullStoryVC = StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)
                         self.present(fullStoryVC, animated: true, completion: nil)
                     print(error)
@@ -41,7 +40,7 @@ class ViewController: UIViewController {
 
 extension ViewController: FullScreenSotryDelegate {
     func currentStory(story: IGStory) {
-        print("this is printing from the delegate")
+        print("this is printing from the delegate", story.lastUpdated)
     }
     func profileImageTapped(userInfo: IGUser) {
         print("current userName: ", userInfo.name)
