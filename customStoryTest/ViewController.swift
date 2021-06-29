@@ -38,12 +38,10 @@ class ViewController: UIViewController {
 }
 
 
-extension ViewController: FullScreenSotryDelegate {
+extension ViewController: FullScreenCallerDelegate {
 
     
-    func nextStory() {
-        
-    }
+  
     
     func currentStoryAndSnap(story: IGStory?, snap:IGSnap?) {
         print("this is printing from the delegate", story?.lastUpdated)
@@ -53,7 +51,5 @@ extension ViewController: FullScreenSotryDelegate {
         print("current userProfileImage: ", userInfo?.picture)
     }
     
-    func storiesClosed() {
-        print("stories Closed")
-    }
+  
 }

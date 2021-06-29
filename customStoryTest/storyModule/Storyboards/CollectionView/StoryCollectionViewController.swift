@@ -21,7 +21,7 @@ class StoryCollectionViewController: UIViewController{
         return vc
     }
     var igStories: IGStories!
-    var delegate: FullScreenSotryDelegate?
+    var delegate: FullScreenCallerDelegate?
     var storyIndex: Int!
     var stories = [IGStory]()
     

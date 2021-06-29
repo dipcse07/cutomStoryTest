@@ -6,9 +6,13 @@
 //
 
 import Foundation
-protocol FullScreenSotryDelegate {
+
+protocol FullScreenCallerDelegate {
     func currentStoryAndSnap(story: IGStory?, snap: IGSnap?)
     func profileImageTapped(userInfo: IGUser?)
+}
+protocol FullScreenSotryDelegate:FullScreenCallerDelegate {
+   
     func storiesClosed()
     func nextStory()
 }
