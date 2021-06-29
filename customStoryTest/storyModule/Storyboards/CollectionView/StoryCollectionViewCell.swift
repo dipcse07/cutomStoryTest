@@ -13,14 +13,12 @@ class StoryCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
        // self.setupViewDidLoad()
-        //self.setupViewWillAppear()
+        self.setupViewDidLoad()
+        
     }
     public var stories: IGStory! {
         didSet{
-            print(stories.debugDescription)
-            print(stories.snaps?.count)
-            self.setupViewDidLoad()
-             self.setupViewWillAppear()
+            self.setupViewWillAppear()
         }
     }
     
@@ -130,7 +128,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
         self.avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width * 0.50
         self.storyImageView.layer.cornerRadius = 20.0
         self.storyImageView.backgroundColor = .black
-        self.progressRate = automaticDissappearAfterSeconds/1000
+        
 
 //       let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
 //           swipeRight.direction = .right
@@ -162,6 +160,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
         self.avatarImageView.transform = .init(scaleX: 0.50, y: 0.50)
         self.topTitleLabel.transform = .init(scaleX: 1, y: 0.85)
 
+        self.progressRate = automaticDissappearAfterSeconds/1000
 
         self.topTitleLabel.text = stories.user.name
 
@@ -297,9 +296,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
 //                UIView.animate(withDuration: 0.2) {
 //                    self.setupViewWillAppear()
 //                }
-              
-                
-                
             }
 
         }
@@ -315,10 +311,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
             }
 
         }
-
-
-
-
     }
 
 

@@ -128,11 +128,11 @@ extension StoryCollectionViewController: FullScreenSotryDelegate{
   
     
     func currentStoryAndSnap(story: IGStory?, snap:IGSnap?) {
-        print("from collection viewController current story")
+        self.delegate?.currentStoryAndSnap(story: story, snap: snap)
     }
     
     func profileImageTapped(userInfo: IGUser?) {
-        print("from collection viewController user tapped")
+        self.delegate?.profileImageTapped(userInfo: userInfo)
     }
     
     func storiesClosed() {
