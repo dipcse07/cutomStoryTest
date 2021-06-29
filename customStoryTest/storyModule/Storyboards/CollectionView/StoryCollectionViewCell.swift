@@ -84,39 +84,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
     }
 
 
-    @IBAction func respondToSwipeGesture(_ gestureRecognizer : UISwipeGestureRecognizer) {
-        if gestureRecognizer.state == .ended {
-            // Perform action.
-            switch gestureRecognizer.direction {
-            case .left:
-            print("swiped left")
-                if currentViewingStoryIndex < stories.snaps!.count - 1 {
-                    self.storyImageIndex = 0
-                    self.timerProgressStartAt = 0.0
-                    currentViewingStoryIndex += 1
-
-                    UIView.animate(withDuration: 0.2) {
-                        self.setupViewWillAppear()
-                    }
-                }
-
-            case .right:
-            print("swiped right")
-                if currentViewingStoryIndex > 0 {
-                    self.storyImageIndex = 0
-                    self.timerProgressStartAt = 0.0
-                    currentViewingStoryIndex -= 1
-
-                    UIView.animate(withDuration: 0.2) {
-                        self.setupViewWillAppear()
-                    }
-                }
-            default:
-                break
-            }
-
-        }
-    }
+   
 
 //    override var prefersStatusBarHidden: Bool {
 //        return true
@@ -126,17 +94,9 @@ class StoryCollectionViewCell: UICollectionViewCell {
     private func setupViewDidLoad() {
         //self.stories = igStories.stories
         self.avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width * 0.50
-        self.storyImageView.layer.cornerRadius = 20.0
+        //self.storyImageView.layer.cornerRadius = 20.0
         self.storyImageView.backgroundColor = .black
-        
 
-//       let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
-//           swipeRight.direction = .right
-//           self.view.addGestureRecognizer(swipeRight)
-//
-//           let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
-//        swipeLeft.direction = .left
-//           self.view.addGestureRecognizer(swipeLeft)
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
             avatarImageView.isUserInteractionEnabled = true
@@ -145,15 +105,8 @@ class StoryCollectionViewCell: UICollectionViewCell {
 
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-        let tappedImage = tapGestureRecognizer.view as! UIImageView
-
-        // Your action
-
         fullScreenStoryDelegateForCell.profileImageTapped(userInfo: stories.user)
-
-
     }
-
 
     private func setupViewWillAppear() {
 
@@ -337,9 +290,9 @@ class StoryCollectionViewCell: UICollectionViewCell {
                 self.storyImageIndex = 0
                 self.timerProgressStartAt = 0.0
                 currentViewingStoryIndex -= 1
-                UIView.animate(withDuration: 0.2) {
-                    self.setupViewWillAppear()
-                }
+//                UIView.animate(withDuration: 0.2) {
+//                    self.setupViewWillAppear()
+//                }
             }
 
 
