@@ -174,7 +174,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
         }
         }
         let avatarImageLink = stories.user.picture
-        print("avatar image: ", avatarImageLink)
+        //print("avatar image: ", avatarImageLink)
         self.storyImageView.kf.indicatorType = .activity
         self.avatarImageView.kf.setImage(with: URL(string: avatarImageLink), placeholder:  nil , options: nil) { (_) in
 
@@ -290,11 +290,16 @@ class StoryCollectionViewCell: UICollectionViewCell {
             }
             else {
                 self.storyImageIndex = 0
-                self.timerProgressStartAt = 0.0
+                self.progressTimer.invalidate()
                 currentViewingStoryIndex += 1
-                UIView.animate(withDuration: 0.2) {
-                    self.setupViewWillAppear()
-                }
+                fullScreenStoryDelegateForCell.nextStory()
+                print("going to next story")
+//                UIView.animate(withDuration: 0.2) {
+//                    self.setupViewWillAppear()
+//                }
+              
+                
+                
             }
 
         }
@@ -306,7 +311,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
                 currentViewingStoryIndex = 0
                 self.progressTimer.invalidate()
                 fullScreenStoryDelegateForCell.nextStory()
-                
+                print("going to next story")
             }
 
         }
