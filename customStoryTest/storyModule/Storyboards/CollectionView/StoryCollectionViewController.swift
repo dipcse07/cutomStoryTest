@@ -11,7 +11,7 @@ class StoryCollectionViewController: UIViewController{
     
     var onceOnly = false
     
-    internal static func instantiate(with stories: IGStories, handPickedStoryIndex: Int, delegate:FullScreenSotryDelegate) -> StoryCollectionViewController {
+    internal static func instantiate(with stories: IGStories, handPickedStoryIndex: Int, delegate:FullScreenCallerDelegate) -> StoryCollectionViewController {
 
         let vc = UIStoryboard(name: "StoryView", bundle: nil).instantiateViewController(withIdentifier: "StoryCollectionViewController") as! StoryCollectionViewController
         vc.igStories = stories
