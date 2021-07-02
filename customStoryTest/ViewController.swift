@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
 //    private let storyFullScreenViewer = UIStoryboard(name: "StoryView", bundle: nil).instantiateViewController(identifier: "StoryFullScreenViewer") as! StoryFullScreenViewer
-    
+    var stories: IGStories?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -25,7 +25,7 @@ class ViewController: UIViewController {
                 if success {
                     if let stories = stories, stories.count > 0 {
                         print(stories.stories.debugDescription)
-                        
+                        self.stories = stories
                         let fullStoryVC = StoryCollectionViewController.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)//StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)
                         self.present(fullStoryVC, animated: true, completion: nil)
                     print(error)
@@ -35,6 +35,12 @@ class ViewController: UIViewController {
         }
         }
     }
+    
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        let fullStoryVC = StoryCollectionViewController.instantiate(with: self.stories!, handPickedStoryIndex: 0, delegate: self)//StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)
+        self.present(fullStoryVC, animated: true, completion: nil)
+    }
+    
 }
 
 
