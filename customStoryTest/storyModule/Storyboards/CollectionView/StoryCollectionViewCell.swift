@@ -75,15 +75,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
     private let pangestureVelocity:CGFloat = 1000
     var fullScreenStoryDelegateForCell: FullScreenSnapDelegate!
     
-    internal static func instantiate(with stories: IGStories, handPickedStoryIndex: Int, delegate:FullScreenSotryDelegate) -> StoryFullScreenViewer {
-        
-        let vc = UIStoryboard(name: "StoryView", bundle: nil).instantiateViewController(withIdentifier: "StoryFullScreenViewer") as! StoryFullScreenViewer
-        vc.igStories = stories
-        vc.fullScreenStoryDelegate = delegate
-        
-        return vc
-    }
-    
     
     
     
@@ -123,8 +114,8 @@ class StoryCollectionViewCell: UICollectionViewCell {
                 if !storySnap.isSeen {
                     let singleStoryImage = storySnap.url
                     self.storyImageView.kf.indicatorType = .activity
-                    self.storyImageView.kf.setImage(with: URL(string: singleStoryImage), placeholder: nil , options: nil) { [self] (_) in
-                        fullScreenStoryDelegateForCell.snapDidAppear(currentSnapInProgress: storySnap)
+                    self.storyImageView.kf.setImage(with: URL(string: singleStoryImage), placeholder: nil , options: nil) {  (_) in
+                        self.fullScreenStoryDelegateForCell.snapDidAppear(currentSnapInProgress: storySnap)
                     }
                 break
                     
