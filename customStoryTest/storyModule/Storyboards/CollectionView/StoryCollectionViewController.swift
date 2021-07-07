@@ -157,11 +157,13 @@ extension StoryCollectionViewController: FullScreenSnapDelegate{
     }
     
     func nextStory() {
+        print("next Story Should go")
         scrollAutomatically()
     }
     
     func snapClosed(atStroy: IGStory, forSnap: IGSnap) {
         self.dismiss(animated: true)
+        print("Story CollectionViewController Dissmissed")
         //delegate.snapClosed(atStroy: atStroy, forSnap: forSnap)
     }
     
