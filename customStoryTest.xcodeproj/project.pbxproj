@@ -183,10 +183,10 @@
 		3EAAB1F9268857F80060A1C8 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				3EB3E2FC26888E3D00B16110 /* Protocols.swift */,
 				3EB3E2FE26896C7C00B16110 /* CollectionView */,
 				3EAAB1FA268857F80060A1C8 /* StoryFullScreenViewer.swift */,
 				3EAAB1FB268857F80060A1C8 /* StoryView.storyboard */,
-				3EB3E2FC26888E3D00B16110 /* Protocols.swift */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";

@@ -8,15 +8,15 @@
 import UIKit
 
 class StoryCollectionViewCell: UICollectionViewCell {
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-       // self.setupViewDidLoad()
+        // self.setupViewDidLoad()
         self.setupViewDidLoad()
         
     }
-    public var stories: IGStory! {
+    public var story: IGStory! {
         didSet{
             self.setupViewWillAppear()
         }
@@ -39,13 +39,13 @@ class StoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet var avatarImageView: UIImageView!
     @IBOutlet var leftIconImageView: UIImageView!
     @IBOutlet var rightIconImageView: UIImageView!
-
-    @IBOutlet var countLabel: UILabel!
-
-
     
-
-
+    @IBOutlet var countLabel: UILabel!
+    
+    
+    
+    
+    
     @IBOutlet var nextButton: UIButton! {
         didSet {
             self.nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
@@ -55,16 +55,17 @@ class StoryCollectionViewCell: UICollectionViewCell {
         didSet {
             self.prevButton.addTarget(self, action: #selector(prevAction), for: .touchUpInside)
         }
-
+        
     }
     
     public var currentViewingStoryIndex = 0
-    private var storyImageIndex = 0
+    private var snapIndex = 0
     public var igStories: IGStories!
-  //  private var stories = [IGStory]()
+    private var snapCount = 0
+    //  private var stories = [IGStory]()
     
     
-
+    
     private var progressTimer = Timer()
     private var automaticDissappearAfterSeconds = 5.0
     private var timerProgressStartAt = 0.0
@@ -72,74 +73,90 @@ class StoryCollectionViewCell: UICollectionViewCell {
     private var topProgressViews = [UIProgressView]()
     public var showBlurEffectOnFullScreenView = true
     private let pangestureVelocity:CGFloat = 1000
-    var fullScreenStoryDelegateForCell: FullScreenSotryDelegate!
+    var fullScreenStoryDelegateForCell: FullScreenSnapDelegate!
     
     internal static func instantiate(with stories: IGStories, handPickedStoryIndex: Int, delegate:FullScreenSotryDelegate) -> StoryFullScreenViewer {
-
+        
         let vc = UIStoryboard(name: "StoryView", bundle: nil).instantiateViewController(withIdentifier: "StoryFullScreenViewer") as! StoryFullScreenViewer
         vc.igStories = stories
         vc.fullScreenStoryDelegate = delegate
         
         return vc
     }
-
-
-   
-
-//    override var prefersStatusBarHidden: Bool {
-//        return true
-//    }
-
-
+    
+    
+    
+    
+    //    override var prefersStatusBarHidden: Bool {
+    //        return true
+    //    }
+    
+    
     private func setupViewDidLoad() {
         //self.stories = igStories.stories
         self.avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width * 0.50
         //self.storyImageView.layer.cornerRadius = 20.0
         self.storyImageView.backgroundColor = .black
-
-
+        
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-            avatarImageView.isUserInteractionEnabled = true
-            avatarImageView.addGestureRecognizer(tapGestureRecognizer)
+        avatarImageView.isUserInteractionEnabled = true
+        avatarImageView.addGestureRecognizer(tapGestureRecognizer)
     }
-
+    
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
-        fullScreenStoryDelegateForCell.profileImageTapped(userInfo: stories.user)
+        fullScreenStoryDelegateForCell.profileImageTapped(userInfo: story.user)
     }
-
+    
     private func setupViewWillAppear() {
-
+        
         self.avatarImageView.transform = .init(scaleX: 0.50, y: 0.50)
         self.topTitleLabel.transform = .init(scaleX: 1, y: 0.85)
-
-        self.progressRate = automaticDissappearAfterSeconds/1000
-
-        self.topTitleLabel.text = stories.user.name
-
-        let storyImages = stories.snaps
         
-        if let singleStoryImage = storyImages?.first?.url{
-        self.storyImageView.kf.indicatorType = .activity
-        self.storyImageView.kf.setImage(with: URL(string: singleStoryImage), placeholder: nil , options: nil) { (_) in
-
+        self.progressRate = automaticDissappearAfterSeconds/1000
+        
+        self.topTitleLabel.text = story.user.name
+        
+        if let storySnaps = story.snaps {
+            for storySnap in storySnaps {
+                if !storySnap.isSeen {
+                    let singleStoryImage = storySnap.url
+                    self.storyImageView.kf.indicatorType = .activity
+                    self.storyImageView.kf.setImage(with: URL(string: singleStoryImage), placeholder: nil , options: nil) { [self] (_) in
+                        fullScreenStoryDelegateForCell.snapDidAppear(currentSnapInProgress: storySnap)
+                    }
+                break
+                    
+                } else {
+                    
+                }
+            }
+        } else {
+            if let storySnap = story.snaps?.first{
+                let singleStoryImage  = storySnap.url
+                self.storyImageView.kf.indicatorType = .activity
+                self.storyImageView.kf.setImage(with: URL(string: singleStoryImage), placeholder: nil , options: nil) { (_) in
+                    self.fullScreenStoryDelegateForCell.snapDidAppear(currentSnapInProgress: storySnap)
+                }
+            }
         }
-        }
-        let avatarImageLink = stories.user.picture
+        
+        let avatarImageLink = story.user.picture
         //print("avatar image: ", avatarImageLink)
         self.storyImageView.kf.indicatorType = .activity
         self.avatarImageView.kf.setImage(with: URL(string: avatarImageLink), placeholder:  nil , options: nil) { (_) in
-
+            
         }
-        self.timeLabel.text = stories.lastUpdated
-
-
-
+        self.timeLabel.text = story.lastUpdated
+        
+        
+        
         if currentViewingStoryIndex == 0 {
             self.leftIconImageView.isHidden = true
             self.rightIconImageView.isHidden = false
         }
-        else if currentViewingStoryIndex == stories.snaps!.count  - 1 {
+        else if currentViewingStoryIndex == story.snaps!.count  - 1 {
             self.leftIconImageView.isHidden = false
             self.rightIconImageView.isHidden = true
         }
@@ -147,9 +164,9 @@ class StoryCollectionViewCell: UICollectionViewCell {
             self.leftIconImageView.isHidden = false
             self.rightIconImageView.isHidden = false
         }
-
+        
         self.timerProgressStartAt = 0.0
-
+        
         UIView.animate(withDuration: 0.5) {
             self.avatarImageView.transform = .init(scaleX: 1.25, y: 1.25)
             self.topTitleLabel.transform = .identity
@@ -160,20 +177,20 @@ class StoryCollectionViewCell: UICollectionViewCell {
                 //self.topTitleLabel.transform = .identity
             }
         }
-
+        
         self.initProgressViews()
         self.initTimerProgress()
-
+        
     }
-
-
+    
+    
     private func initProgressViews() {
-
+        
         for subViews in self.progressViewHolder.subviews {
             subViews.removeFromSuperview()
         }
         self.topProgressViews.removeAll()
-
+        
         let stackView   = UIStackView()
         stackView.axis  = .horizontal
         stackView.contentMode = .scaleAspectFill
@@ -181,80 +198,90 @@ class StoryCollectionViewCell: UICollectionViewCell {
         stackView.alignment = .center
         stackView.spacing   = 8.0
         stackView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width-40, height: 6)
-
-
+        
+        
         //stackView.translatesAutoresizingMaskIntoConstraints = false
-        let storiyImages = stories.snaps
-
+        let storiyImages = story.snaps
+        
         for _ in 0..<storiyImages!.count {
             let progressView = UIProgressView()
             progressView.tintColor = .white
             progressView.progress = 0.0
             progressView.contentMode = .scaleAspectFill
-
+            
             stackView.addArrangedSubview(progressView)
             self.topProgressViews.append(progressView)
         }
         self.progressViewHolder.addSubview(stackView)
     }
-
-
-
+    
+    
+    
     private func updateStoryImages(index: Int) {
-        let storiyImages = stories.snaps
-        let storyImageLink = storiyImages![index].url
-      
-        fullScreenStoryDelegateForCell.currentStoryAndSnap(story: self.stories, snap: stories.snaps![index] )
+        if let snaps = story.snaps {
+            if index > 0 {
+                self.fullScreenStoryDelegateForCell.snapDidDisappear(previousSnap: snaps[index - 1])
+            }
+        let storyImageLink = snaps[index].url
+        
+        
         self.storyImageView.kf.setImage(with: URL(string: storyImageLink), placeholder:  nil , options: nil) { (_) in
-
+            self.fullScreenStoryDelegateForCell.snapDidAppear(currentSnapInProgress: snaps[index] )
+        }
+            if index < snaps.count - 2 {
+                fullScreenStoryDelegateForCell.snapWillAppear(nextSnap: snaps[index + 1])
+            }
+            
+    }else {
+        print("there is no snap to show in current snap or update the story")
         }
     }
-
-
-
-
+    
+    
+    
+    
     @objc func closeButtonAction() {
         self.progressTimer.invalidate()
-        fullScreenStoryDelegateForCell.storiesClosed()
+        fullScreenStoryDelegateForCell.snapClosed(atStroy: story, forSnap: story.snaps![snapIndex])
         
     }
-
+    
     @objc func nextAction() {
-
-        let imagesInCurrentStory = stories.snaps
-
+        
+        let imagesInCurrentStory = story.snaps
+        
         if self.currentViewingStoryIndex < imagesInCurrentStory!.count-1 {
-
-
-            if self.storyImageIndex < imagesInCurrentStory!.count-1 {
-
-                self.topProgressViews[storyImageIndex].progress = 1.0
-
-                self.storyImageIndex += 1
+            
+            
+            if self.snapIndex < imagesInCurrentStory!.count-1 {
+                
+                self.topProgressViews[snapIndex].progress = 1.0
+                
+                self.snapIndex += 1
                 self.timerProgressStartAt = 0.0
-
-
+                
+                
                 UIView.animate(withDuration: 0.2) {
-                    self.updateStoryImages(index: self.storyImageIndex)
+                    self.updateStoryImages(index: self.snapIndex)
                 }
-
+                
                 self.timerProgressStartAt += self.progressRate
             }
             else {
-                self.storyImageIndex = 0
-                self.progressTimer.invalidate()
-                currentViewingStoryIndex += 1
-                fullScreenStoryDelegateForCell.nextStory()
-                print("going to next story")
-//                UIView.animate(withDuration: 0.2) {
-//                    self.setupViewWillAppear()
-//                }
-            }
-
+//                self.storyImageIndex = 0
+//                self.progressTimer.invalidate()
+//                currentViewingStoryIndex += 1
+//                fullScreenStoryDelegateForCell.nextStory()
+//                print("going to next story")
+//                //                UIView.animate(withDuration: 0.2) {
+//                //                    self.setupViewWillAppear()
+//                //                }
+          }
+            
         }
         else {
-            if self.storyImageIndex < imagesInCurrentStory!.count-1 {
-
+            if self.snapIndex < imagesInCurrentStory!.count-1 {
+                
             }
             else {
                 currentViewingStoryIndex = 0
@@ -262,119 +289,117 @@ class StoryCollectionViewCell: UICollectionViewCell {
                 fullScreenStoryDelegateForCell.nextStory()
                 print("going to next story")
             }
-
+            
         }
     }
-
-
+    
+    
     @objc func prevAction() {
-
+        
         if self.currentViewingStoryIndex > 0 {
-            if self.storyImageIndex > 0 {
-
-
-                self.topProgressViews[storyImageIndex].progress = 0.0
-                self.storyImageIndex -= 1
-                self.topProgressViews[storyImageIndex].progress = 0.0
+            if self.snapIndex > 0 {
+                self.topProgressViews[snapIndex].progress = 0.0
+                self.snapIndex -= 1
+                self.topProgressViews[snapIndex].progress = 0.0
                 self.timerProgressStartAt = 0.0
-
-
-
+                
+                
+                
                 UIView.animate(withDuration: 0.2) {
-                    self.updateStoryImages(index: self.storyImageIndex)
+                    self.updateStoryImages(index: self.snapIndex)
                 }
-
+                
                 self.timerProgressStartAt += self.progressRate
             }
             else {
-                self.storyImageIndex = 0
+                self.snapIndex = 0
                 self.timerProgressStartAt = 0.0
                 currentViewingStoryIndex -= 1
-//                UIView.animate(withDuration: 0.2) {
-//                    self.setupViewWillAppear()
-//                }
+                //                UIView.animate(withDuration: 0.2) {
+                //                    self.setupViewWillAppear()
+                //                }
             }
-
-
+            
+            
         }
     }
-
-
-
-
+    
+    
+    
+    
     private func initTimerProgress() {
-
+        
         self.progressTimer.invalidate()
         self.progressTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(timerProgressAction), userInfo: nil, repeats: true)
         self.progressTimer.fire()
     }
-
-
-
+    
+    
+    
     @objc func timerProgressAction() {
         //self.countLabel.text = "\(currentViewingStoryIndex+1)\n\(storyImageIndex+1)"
         if timerProgressStartAt > 1.0 {
             //self.closeButtonAction()
-            let imagesInCurrentStory = stories.snaps
-
-            if self.storyImageIndex < imagesInCurrentStory!.count-1 {
-
-                self.storyImageIndex += 1
+            let imagesInCurrentStory = story.snaps
+            
+            if self.snapIndex < imagesInCurrentStory!.count-1 {
+                
+                self.snapIndex += 1
                 self.timerProgressStartAt = 0.0
                 UIView.animate(withDuration: 0.2) {
-                    self.updateStoryImages(index: self.storyImageIndex)
+                    self.updateStoryImages(index: self.snapIndex)
                 }
-
+                
                 self.timerProgressStartAt += self.progressRate
             }
             else {
-//                self.timerProgressStartAt = 0.0
-//                self.storyImageIndex = 0
+                //                self.timerProgressStartAt = 0.0
+                //                self.storyImageIndex = 0
                 //self.closeButtonAction()
-
+                
                 for progressView in topProgressViews {
                     progressView.progress = 0.0
                 }
-
+                
                 self.initProgressViews()
                 self.nextAction()
-
+                
             }
-
+            
         }
         else {
-            if storyImageIndex < topProgressViews.count {
-                self.topProgressViews[storyImageIndex].progress = Float(timerProgressStartAt)
+            if snapIndex < topProgressViews.count {
+                self.topProgressViews[snapIndex].progress = Float(timerProgressStartAt)
                 self.timerProgressStartAt += self.progressRate
             }
-
-
+            
+            
         }
-
-
+        
+        
     }
-
-
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.first != nil {
             //print("Finger touched!")
             self.progressTimer.invalidate()
         }
     }
-
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.first != nil {
             //print("finger is not touching.")
             self.initTimerProgress()
         }
     }
-
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.first != nil {
             //print("Touch Move")
             self.progressTimer.invalidate()
         }
     }
-
-
+    
+    
 }

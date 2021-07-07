@@ -153,7 +153,7 @@ class StoryFullScreenViewer: UIViewController {
 
         // Your action
         let currentUserInfo = stories[currentViewingStoryIndex].user
-        fullScreenStoryDelegate.profileImageTapped(userInfo: currentUserInfo)
+       // fullScreenStoryDelegate.profileImageTapped(userInfo: currentUserInfo)
         
         
     }
@@ -270,7 +270,7 @@ class StoryFullScreenViewer: UIViewController {
     private func updateStoryImages(index: Int) {
         let storiyImages = stories[currentViewingStoryIndex].snaps!
         let storyImageLink = storiyImages[index].url
-        fullScreenStoryDelegate.currentStoryAndSnap(story: stories[index], snap: storiyImages[index])
+       //fullScreenStoryDelegate.currentStoryAndSnap(story: stories[index], snap: storiyImages[index])
         self.storyImageView.kf.setImage(with: URL(string: storyImageLink), placeholder:  nil , options: nil) { (_) in
             
         }
@@ -280,7 +280,7 @@ class StoryFullScreenViewer: UIViewController {
     
     
     @objc func closeButtonAction() {
-        fullScreenStoryDelegate.storiesClosed()
+        //fullScreenStoryDelegate.storiesClosed()
         self.dismiss(animated: true, completion: nil)
     }
     

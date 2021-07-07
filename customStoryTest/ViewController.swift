@@ -44,18 +44,20 @@ class ViewController: UIViewController {
 }
 
 
-extension ViewController: FullScreenCallerDelegate {
+extension ViewController: FullScreenSotryDelegate {
+    func storyDidAppear(currentStoryInProgress: IGStory?) {
+        
+    }
+    
+    func storyWillAppear(nextStory: IGStory?) {
+        
+    }
+    
+    func storyDidDisAppear(previousStory: IGStory?) {
+        
+    }
+    
+
 
     
-  
-    
-    func currentStoryAndSnap(story: IGStory?, snap:IGSnap?) {
-        print("this is printing from the delegate", story?.lastUpdated)
-    }
-    func profileImageTapped(userInfo: IGUser?) {
-        print("current userName: ", userInfo?.name)
-        print("current userProfileImage: ", userInfo?.picture)
-    }
-    
-  
 }
