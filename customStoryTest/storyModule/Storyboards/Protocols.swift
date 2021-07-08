@@ -16,12 +16,19 @@ protocol FullScreenSnapDelegate {
     
     func profileImageTapped(userInfo: IGUser?)
     
-    func snapClosed(atStroy: IGStory, forSnap: IGSnap)
+    func snapClosed(isClosed: Bool, atStroy: IGStory, forStoryIndexPath:IndexPath, forSnap: IGSnap)
     
-    func nextStory()
     
 }
 protocol FullScreenSotryDelegate {
+    func snapDidAppear(currentSnapInProgress:IGSnap?)
+    func snapWillAppear(nextSnap: IGSnap?)
+    //func snapWillDisappear()
+    func snapDidDisappear(previousSnap: IGSnap?)
+    
+    func profileImageTapped(userInfo: IGUser?)
+    
+    func snapClosed(atStroy: IGStory, forStoryIndexPath:IndexPath, forSnap: IGSnap)
     
     func storyDidAppear(currentStoryInProgress: IGStory?)
     func storyWillAppear(nextStory: IGStory?)

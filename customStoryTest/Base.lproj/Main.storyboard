@@ -23,12 +23,21 @@
                                     <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FM2-ao-s8w"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C77-TM-gRb">
+                                <rect key="frame" x="184" y="503" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="b2:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cwl-OA-5L7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ams-t9-sfm" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="YQt-Hr-2JV"/>
+                            <constraint firstItem="C77-TM-gRb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gmz-XP-vAv"/>
                             <constraint firstItem="ams-t9-sfm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hN5-9o-3Nd"/>
+                            <constraint firstItem="C77-TM-gRb" firstAttribute="top" secondItem="ams-t9-sfm" secondAttribute="bottom" constant="40" id="hwW-Lo-zpk"/>
                         </constraints>
                     </view>
                 </viewController>
