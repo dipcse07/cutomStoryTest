@@ -17,6 +17,9 @@ This module will require KingFisher for image caching and downloads
 1. Call or Initiate the StoryFullVC and pass the IGStories Data
 2. Present it from your respective viewController
 
+let fullStoryVC = StoryFullVC(with: self.stories!, handPickedStoryIndex: 0, delegate: self)//StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: selectedStoryIndex, delegate: self)
+
+self.present(fullStoryVC, animated: true, completion: nil)
 ```
 
 ## Contributing
