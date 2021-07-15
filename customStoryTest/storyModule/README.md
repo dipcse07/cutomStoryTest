@@ -14,7 +14,7 @@ This module will require KingFisher for image caching and downloads
 
 ```Swift
 
-1. Call or Initiate the FullScreenStoryView and pass the IGStories Data
+1. Call or Initiate the StoryFullVC and pass the IGStories Data
 2. Present it from your respective viewController
 
 ```

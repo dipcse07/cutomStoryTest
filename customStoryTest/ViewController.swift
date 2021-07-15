@@ -27,8 +27,7 @@ class ViewController: UIViewController {
                         print(stories.stories.debugDescription)
                         self.stories = stories
                         let fullStoryVC = StoryFullVC(with: stories, handPickedStoryIndex: 0, delegate: self)
-                            
-                            //StoryCollectionViewController.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)//StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)
+
                         self.present(fullStoryVC, animated: true, completion: nil)
                     print(error)
                 }
@@ -39,14 +38,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        let fullStoryVC = StoryCollectionViewController.instantiate(with: self.stories!, handPickedStoryIndex: 0, delegate: self)//StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)
+        let fullStoryVC = StoryFullVC(with: self.stories!, handPickedStoryIndex: 0, delegate: self)//StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)
         self.present(fullStoryVC, animated: true, completion: nil)
     }
     
     
     @IBAction func b2(_ sender: UIButton) {
         
-        let fullStoryVC = StoryFullVC(with: self.stories!, handPickedStoryIndex: 0, delegate: self)//StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)
+        let fullStoryVC = StoryFullVC(with: self.stories!, handPickedStoryIndex: 1, delegate: self)//StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)
         self.present(fullStoryVC, animated: true, completion: nil)
     }
     

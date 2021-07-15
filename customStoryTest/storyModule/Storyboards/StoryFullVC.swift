@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StoryFullVC: UIViewController {
+public class StoryFullVC: UIViewController {
     var onceOnly = false
     
     var igStories: IGStories!
@@ -32,7 +32,7 @@ class StoryFullVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -42,26 +42,7 @@ class StoryFullVC: UIViewController {
        // populateStories()
         self.stories = self.igStories.stories
     }
-    
-//    func populateStories (){
-//
-//        snaps = [Snap(image: UIImage(named: "1")!),Snap(image: UIImage(named: "2")!)]
-//        stories.append(Story(snaps: snaps))
-//        snaps = [Snap(image: UIImage(named: "3")!),Snap(image: UIImage(named: "1")!)]
-//        stories.append(Story(snaps: snaps))
-//    }
-//
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     func scrollAutomatically() {
         
         if let coll  = storyCollectionView{
@@ -97,11 +78,11 @@ class StoryFullVC: UIViewController {
 }
 
 extension StoryFullVC:  UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.stories.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = storyCollectionView.dequeueReusableCell(withReuseIdentifier: "StoryCollectionViewCell", for: indexPath) as! StoryCollectionViewCell
         print(indexPath.row, indexPath.item)
         cell.story = self.stories[indexPath.item]
@@ -110,7 +91,7 @@ extension StoryFullVC:  UICollectionViewDataSource {
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if !onceOnly {
               let indexToScrollTo = IndexPath(item: storyIndex , section: 0)
               self.storyCollectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
@@ -124,7 +105,7 @@ extension StoryFullVC:  UICollectionViewDataSource {
 
 extension StoryFullVC:  UICollectionViewDelegate {
   
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
     
@@ -133,7 +114,7 @@ extension StoryFullVC:  UICollectionViewDelegate {
 }
 
 extension StoryFullVC: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
 }

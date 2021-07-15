@@ -20,6 +20,7 @@ protocol FullScreenSnapDelegate {
     
     
 }
+
 protocol FullScreenSotryDelegate {
     func snapDidAppear(currentSnapInProgress:IGSnap?)
     func snapWillAppear(nextSnap: IGSnap?)
