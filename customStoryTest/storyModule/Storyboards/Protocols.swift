@@ -9,31 +9,31 @@ import Foundation
 
 protocol FullScreenSnapDelegate {
    // func currentStoryAndSnap(story: IGStory?, snap: IGSnap?)
-    func snapDidAppear(currentSnapInProgress:IGSnap?)
-    func snapWillAppear(nextSnap: IGSnap?)
+    func snapDidAppear(currentSnapInProgress:IFSnap?)
+    func snapWillAppear(nextSnap: IFSnap?)
     //func snapWillDisappear()
-    func snapDidDisappear(previousSnap: IGSnap?)
+    func snapDidDisappear(previousSnap: IFSnap?)
     
-    func profileImageTapped(userInfo: IGUser?)
+    func profileImageTapped(userInfo: IFUser?)
     
-    func snapClosed(isClosed: Bool, atStroy: IGStory, forStoryIndexPath:IndexPath, forSnap: IGSnap)
+    func snapClosed(isClosed: Bool, atStroy: IFSingleStory, forStoryIndexPath:IndexPath, forSnap: IFSnap)
     
     
 }
 
 protocol FullScreenSotryDelegate {
-    func snapDidAppear(currentSnapInProgress:IGSnap?)
-    func snapWillAppear(nextSnap: IGSnap?)
+    func snapDidAppear(currentSnapInProgress:IFSnap?)
+    func snapWillAppear(nextSnap: IFSnap?)
     //func snapWillDisappear()
-    func snapDidDisappear(previousSnap: IGSnap?)
+    func snapDidDisappear(previousSnap: IFSnap?)
     
-    func profileImageTapped(userInfo: IGUser?)
+    func profileImageTapped(userInfo: IFUser?)
     
-    func snapClosed(atStroy: IGStory, forStoryIndexPath:IndexPath, forSnap: IGSnap)
+    func snapClosed(atStroy: IFSingleStory, forStoryIndexPath:IndexPath, forSnap: IFSnap)
     
-    func storyDidAppear(currentStoryInProgress: IGStory?)
-    func storyWillAppear(nextStory: IGStory?)
-    func storyDidDisAppear(previousStory: IGStory?)
+    func storyDidAppear(currentStoryInProgress: IFSingleStory?)
+    func storyWillAppear(nextStory: IFSingleStory?)
+    func storyDidDisAppear(previousStory: IFSingleStory?)
 
     
 }

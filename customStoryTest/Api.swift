@@ -82,7 +82,7 @@ class Api {
     }
     
     
-    func getStories(withPageNo page:Int, pageSize:Int, completion:@escaping (Bool, APIError?, IGStories?) -> ()){
+    func getStories(withPageNo page:Int, pageSize:Int, completion:@escaping (Bool, APIError?, IFStories?) -> ()){
         let URL = getStories
         let parameters = ["page":page, "pageSize":pageSize]
         Alamofire.request(URL, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: headers).responseData(completionHandler: { (response) in
@@ -91,7 +91,7 @@ class Api {
                     completion(false, self.getAPIError(fromError: error), nil)
                 case .success(let data):
                     do {
-                        let stories = try JSONDecoder().decode(IGStories.self, from: data)
+                        let stories = try JSONDecoder().decode(IFStories.self, from: data)
                         completion(true, nil, stories)
                     } catch {
                         completion(false, self.apiError(withStatusCode: (response.response?.statusCode)!, andMessage: "data error!"), nil)

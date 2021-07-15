@@ -28,12 +28,12 @@
 		3EAAB203268857F80060A1C8 /* Uni Sans Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3EAAB1EF268857F80060A1C8 /* Uni Sans Regular.otf */; };
 		3EAAB204268857F80060A1C8 /* Uni Sans Thin Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F0268857F80060A1C8 /* Uni Sans Thin Italic.otf */; };
 		3EAAB205268857F80060A1C8 /* Uni Sans Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F1268857F80060A1C8 /* Uni Sans Thin.otf */; };
-		3EAAB206268857F80060A1C8 /* IGGroupInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F3268857F80060A1C8 /* IGGroupInfo.swift */; };
-		3EAAB207268857F80060A1C8 /* IGInstitute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F4268857F80060A1C8 /* IGInstitute.swift */; };
-		3EAAB208268857F80060A1C8 /* IGSnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F5268857F80060A1C8 /* IGSnap.swift */; };
-		3EAAB209268857F80060A1C8 /* IGStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F6268857F80060A1C8 /* IGStories.swift */; };
-		3EAAB20A268857F80060A1C8 /* IGStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F7268857F80060A1C8 /* IGStory.swift */; };
-		3EAAB20B268857F80060A1C8 /* IGUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F8268857F80060A1C8 /* IGUser.swift */; };
+		3EAAB206268857F80060A1C8 /* IFGroupInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F3268857F80060A1C8 /* IFGroupInfo.swift */; };
+		3EAAB207268857F80060A1C8 /* IFInstitute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F4268857F80060A1C8 /* IFInstitute.swift */; };
+		3EAAB208268857F80060A1C8 /* IFSnap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F5268857F80060A1C8 /* IFSnap.swift */; };
+		3EAAB209268857F80060A1C8 /* IFStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F6268857F80060A1C8 /* IFStories.swift */; };
+		3EAAB20A268857F80060A1C8 /* IFSingleStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F7268857F80060A1C8 /* IFSingleStory.swift */; };
+		3EAAB20B268857F80060A1C8 /* IFUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F8268857F80060A1C8 /* IFUser.swift */; };
 		3EB3E2FD26888E3D00B16110 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB3E2FC26888E3D00B16110 /* Protocols.swift */; };
 		F3B4B2DDCCF0B90EE25E0DC8 /* Pods_customStoryTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5135FC2C8FC17921B6A5567 /* Pods_customStoryTest.framework */; };
 /* End PBXBuildFile section */
@@ -62,12 +62,12 @@
 		3EAAB1EF268857F80060A1C8 /* Uni Sans Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Uni Sans Regular.otf"; sourceTree = "<group>"; };
 		3EAAB1F0268857F80060A1C8 /* Uni Sans Thin Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Uni Sans Thin Italic.otf"; sourceTree = "<group>"; };
 		3EAAB1F1268857F80060A1C8 /* Uni Sans Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Uni Sans Thin.otf"; sourceTree = "<group>"; };
-		3EAAB1F3268857F80060A1C8 /* IGGroupInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGGroupInfo.swift; sourceTree = "<group>"; };
-		3EAAB1F4268857F80060A1C8 /* IGInstitute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGInstitute.swift; sourceTree = "<group>"; };
-		3EAAB1F5268857F80060A1C8 /* IGSnap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGSnap.swift; sourceTree = "<group>"; };
-		3EAAB1F6268857F80060A1C8 /* IGStories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGStories.swift; sourceTree = "<group>"; };
-		3EAAB1F7268857F80060A1C8 /* IGStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGStory.swift; sourceTree = "<group>"; };
-		3EAAB1F8268857F80060A1C8 /* IGUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGUser.swift; sourceTree = "<group>"; };
+		3EAAB1F3268857F80060A1C8 /* IFGroupInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFGroupInfo.swift; sourceTree = "<group>"; };
+		3EAAB1F4268857F80060A1C8 /* IFInstitute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFInstitute.swift; sourceTree = "<group>"; };
+		3EAAB1F5268857F80060A1C8 /* IFSnap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFSnap.swift; sourceTree = "<group>"; };
+		3EAAB1F6268857F80060A1C8 /* IFStories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFStories.swift; sourceTree = "<group>"; };
+		3EAAB1F7268857F80060A1C8 /* IFSingleStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFSingleStory.swift; sourceTree = "<group>"; };
+		3EAAB1F8268857F80060A1C8 /* IFUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFUser.swift; sourceTree = "<group>"; };
 		3EB3E2FC26888E3D00B16110 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		71DD9A716CB852676E084E47 /* Pods-customStoryTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-customStoryTest.debug.xcconfig"; path = "Target Support Files/Pods-customStoryTest/Pods-customStoryTest.debug.xcconfig"; sourceTree = "<group>"; };
 		C718A13E7D9DBB4AA132A43E /* Pods-customStoryTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-customStoryTest.release.xcconfig"; path = "Target Support Files/Pods-customStoryTest/Pods-customStoryTest.release.xcconfig"; sourceTree = "<group>"; };
@@ -166,12 +166,12 @@
 		3EAAB1F2268857F80060A1C8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3EAAB1F3268857F80060A1C8 /* IGGroupInfo.swift */,
-				3EAAB1F4268857F80060A1C8 /* IGInstitute.swift */,
-				3EAAB1F5268857F80060A1C8 /* IGSnap.swift */,
-				3EAAB1F6268857F80060A1C8 /* IGStories.swift */,
-				3EAAB1F7268857F80060A1C8 /* IGStory.swift */,
-				3EAAB1F8268857F80060A1C8 /* IGUser.swift */,
+				3EAAB1F3268857F80060A1C8 /* IFGroupInfo.swift */,
+				3EAAB1F4268857F80060A1C8 /* IFInstitute.swift */,
+				3EAAB1F5268857F80060A1C8 /* IFSnap.swift */,
+				3EAAB1F6268857F80060A1C8 /* IFStories.swift */,
+				3EAAB1F7268857F80060A1C8 /* IFSingleStory.swift */,
+				3EAAB1F8268857F80060A1C8 /* IFUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -340,18 +340,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EAAB1D3268856A20060A1C8 /* ViewController.swift in Sources */,
-				3EAAB20A268857F80060A1C8 /* IGStory.swift in Sources */,
-				3EAAB207268857F80060A1C8 /* IGInstitute.swift in Sources */,
-				3EAAB208268857F80060A1C8 /* IGSnap.swift in Sources */,
-				3EAAB20B268857F80060A1C8 /* IGUser.swift in Sources */,
-				3EAAB209268857F80060A1C8 /* IGStories.swift in Sources */,
+				3EAAB20A268857F80060A1C8 /* IFSingleStory.swift in Sources */,
+				3EAAB207268857F80060A1C8 /* IFInstitute.swift in Sources */,
+				3EAAB208268857F80060A1C8 /* IFSnap.swift in Sources */,
+				3EAAB20B268857F80060A1C8 /* IFUser.swift in Sources */,
+				3EAAB209268857F80060A1C8 /* IFStories.swift in Sources */,
 				3EAAB1CF268856A20060A1C8 /* AppDelegate.swift in Sources */,
 				3E9853F7269FD89A0065FD6D /* StoryFullVC.swift in Sources */,
 				3EAAB1E3268857630060A1C8 /* Api.swift in Sources */,
 				3EB3E2FD26888E3D00B16110 /* Protocols.swift in Sources */,
 				3EAAB1D1268856A20060A1C8 /* SceneDelegate.swift in Sources */,
 				3EA2809D26898D23001B7A41 /* StoryCollectionViewCell.swift in Sources */,
-				3EAAB206268857F80060A1C8 /* IGGroupInfo.swift in Sources */,
+				3EAAB206268857F80060A1C8 /* IFGroupInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

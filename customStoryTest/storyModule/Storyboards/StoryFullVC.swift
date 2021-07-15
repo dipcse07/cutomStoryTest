@@ -10,15 +10,15 @@ import UIKit
 public class StoryFullVC: UIViewController {
     var onceOnly = false
     
-    var igStories: IGStories!
+    var igStories: IFStories!
     var delegate: FullScreenSotryDelegate?
     var storyIndex: Int!
-    var previousSnap: IGSnap!
-    private var stories = [IGStory]()
+    var previousSnap: IFSnap!
+    private var stories = [IFSingleStory]()
     
     @IBOutlet weak var storyCollectionView: UICollectionView!
     
-    init(with stories: IGStories, handPickedStoryIndex: Int, delegate:FullScreenSotryDelegate) {
+    init(with stories: IFStories, handPickedStoryIndex: Int, delegate:FullScreenSotryDelegate) {
         self.igStories = stories
         self.delegate = delegate
         self.storyIndex = handPickedStoryIndex
@@ -120,17 +120,17 @@ extension StoryFullVC: UICollectionViewDelegateFlowLayout {
 }
 
 extension StoryFullVC: FullScreenSnapDelegate{
-    func snapDidAppear(currentSnapInProgress: IGSnap?) {
+    func snapDidAppear(currentSnapInProgress: IFSnap?) {
         print("snap Did Appear: ", currentSnapInProgress?.lastUpdated)
         delegate?.snapDidAppear(currentSnapInProgress: currentSnapInProgress)
     }
     
-    func snapWillAppear(nextSnap: IGSnap?) {
+    func snapWillAppear(nextSnap: IFSnap?) {
         print("snap will Appear: ", nextSnap?.lastUpdated)
         delegate?.snapWillAppear(nextSnap: nextSnap)
     }
     
-    func snapDidDisappear(previousSnap: IGSnap?) {
+    func snapDidDisappear(previousSnap: IFSnap?) {
         print("snap Did Disappear: ", previousSnap?.lastUpdated)
         if let snap = previousSnap {
             self.previousSnap = snap
@@ -140,20 +140,20 @@ extension StoryFullVC: FullScreenSnapDelegate{
         }
     }
     
-    func profileImageTapped(userInfo: IGUser?) {
-        print("ProfileUserTapped in Story Collection View Controller for Story Cell: ", userInfo?.name)
+    func profileImageTapped(userInfo: IFUser?) {
+        print("ProfileUserTapped in Story Collection View Controller for Story Cell: ", userInfo?.userName)
         delegate?.profileImageTapped(userInfo: userInfo)
     }
     
 
     
-    func snapClosed(isClosed: Bool, atStroy: IGStory, forStoryIndexPath:IndexPath, forSnap: IGSnap) {
+    func snapClosed(isClosed: Bool, atStroy: IFSingleStory, forStoryIndexPath:IndexPath, forSnap: IFSnap) {
         if forStoryIndexPath.item <  self.stories.count - 1, !isClosed {
             print("Auto Scrolling to next Story Cell")
             scrollAutomatically()
         }else {
         
-            print("Story CollectionViewController Dissmissed", forSnap.url)
+            print("Story CollectionViewController Dissmissed", forSnap.storySnapUrl)
         self.dismiss(animated: true)
             delegate?.snapClosed(atStroy: atStroy , forStoryIndexPath: forStoryIndexPath, forSnap: forSnap)
         }

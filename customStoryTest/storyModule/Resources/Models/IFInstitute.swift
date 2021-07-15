@@ -1,14 +1,7 @@
-//
-//  IGInstitute.swift
-//  TAPSocial
-//
-//  Created by Rezwan Islam on 26/12/20.
-//  Copyright © 2020 Rezwan Islam. All rights reserved.
-//
 
 import Foundation
 
-public class IGInstitute: Codable {
+public class IFInstitute: Codable {
 	public let imageURL: String?
 	public let instituteId: String
 	public let instituteName: String?

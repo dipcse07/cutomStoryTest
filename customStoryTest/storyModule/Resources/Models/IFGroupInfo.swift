@@ -1,14 +1,8 @@
-//
-//  IGGroupInfo.swift
-//  TAPSocial
-//
-//  Created by Rezwan Islam on 26/12/20.
-//  Copyright © 2020 Rezwan Islam. All rights reserved.
-//
+
 
 import Foundation
 
-public class IGGroupInfo: Codable {
+public class IFGroupInfo: Codable {
 	var groupId:String?
 	var groupName:String?
 	var groupType:String?

@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
 //    private let storyFullScreenViewer = UIStoryboard(name: "StoryView", bundle: nil).instantiateViewController(identifier: "StoryFullScreenViewer") as! StoryFullScreenViewer
-    var stories: IGStories?
+    var stories: IFStories?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
             DispatchQueue.main.async { [self] in
                 
                 if success {
-                    if let stories = stories, stories.count > 0 {
+                    if let stories = stories, stories.totalStoryCount > 0 {
                         print(stories.stories.debugDescription)
                         self.stories = stories
                         let fullStoryVC = StoryFullVC(with: stories, handPickedStoryIndex: 0, delegate: self)
@@ -53,37 +53,37 @@ class ViewController: UIViewController {
 
 
 extension ViewController: FullScreenSotryDelegate {
-    func snapDidAppear(currentSnapInProgress: IGSnap?) {
-        print("current snap info ID: passed in Caller View Controller: ", currentSnapInProgress?.internalIdentifier)
+    func snapDidAppear(currentSnapInProgress: IFSnap?) {
+        print("current snap info ID: passed in Caller View Controller: ", currentSnapInProgress?.storySnapIdentifier)
     }
     
-    func snapDidDisappear(previousSnap: IGSnap?) {
-        print("previous snap info ID: passed in Caller View Controller: ", previousSnap?.internalIdentifier)
+    func snapDidDisappear(previousSnap: IFSnap?) {
+        print("previous snap info ID: passed in Caller View Controller: ", previousSnap?.storySnapIdentifier)
     }
     
-    func snapWillAppear(nextSnap: IGSnap?) {
-        print("next snap info ID: passed in Caller View Controller: ", nextSnap?.internalIdentifier)
+    func snapWillAppear(nextSnap: IFSnap?) {
+        print("next snap info ID: passed in Caller View Controller: ", nextSnap?.storySnapIdentifier)
     }
     
-    func profileImageTapped(userInfo: IGUser?) {
-        print("user info passed in Caller View Controller: ", userInfo?.name)
+    func profileImageTapped(userInfo: IFUser?) {
+        print("user info passed in Caller View Controller: ", userInfo?.userName)
         
     }
     
-    func snapClosed(atStroy: IGStory, forStoryIndexPath: IndexPath, forSnap: IGSnap) {
+    func snapClosed(atStroy: IFSingleStory, forStoryIndexPath: IndexPath, forSnap: IFSnap) {
         print("snapClosed info passed in Caller View Controller: ", atStroy.group?.groupType, forStoryIndexPath, forSnap.lastUpdated )
     }
     
-    func storyDidAppear(currentStoryInProgress: IGStory?) {
+    func storyDidAppear(currentStoryInProgress: IFSingleStory?) {
         print("current story info passed in Caller View Controller: ", currentStoryInProgress?.institute?.instituteName)
         
     }
     
-    func storyWillAppear(nextStory: IGStory?) {
+    func storyWillAppear(nextStory: IFSingleStory?) {
         print("next story info passed in Caller View Controller: ", nextStory?.institute?.instituteName)
     }
     
-    func storyDidDisAppear(previousStory: IGStory?) {
+    func storyDidDisAppear(previousStory: IFSingleStory?) {
         print("next story info passed in Caller View Controller: ", previousStory?.institute?.instituteName)
     }
     
