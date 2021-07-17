@@ -446,6 +446,13 @@ extension StoryCollectionViewCell {
             }
         }
     }
+    
+    private func getVideoView(with index: Int) -> IGPlayerView? {
+        if let videoView = self.videoView.subviews.filter({$0.tag == index + snapViewTagIndicator}).first as? IGPlayerView {
+            return videoView
+        }
+        return nil
+    }
 }
 
 
