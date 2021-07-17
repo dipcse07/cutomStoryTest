@@ -18,38 +18,22 @@
             endingLineNumber = "190"
             landmarkName = "setupViewWillAppear()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "211641A2-F172-4D2D-91F9-058A45644FA4 - 2d35573726795cf8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "customStoryTest.StoryFullScreenViewer.setupViewWillAppear() -&gt; ()"
-                  moduleName = "customStoryTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/MYMACHDD/XcodeTutoProjects/customStoryTest/customStoryTest/storyModule/Storyboards/StoryFullScreenViewer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "190"
-                  endingLineNumber = "190"
-                  offsetFromSymbolStart = "3944">
-               </Location>
-               <Location
-                  uuid = "211641A2-F172-4D2D-91F9-058A45644FA4 - d13096994f1349e9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Result&lt;Kingfisher.RetrieveImageResult, Kingfisher.KingfisherError&gt;) -&gt; () in customStoryTest.StoryFullScreenViewer.setupViewWillAppear() -&gt; ()"
-                  moduleName = "customStoryTest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Volumes/MYMACHDD/XcodeTutoProjects/customStoryTest/customStoryTest/storyModule/Storyboards/StoryFullScreenViewer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "192"
-                  endingLineNumber = "192"
-                  offsetFromSymbolStart = "4">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "12B9FF6E-8BC6-46A9-ACB4-EB5E67FDFDFB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../Users/dip/Desktop/Models/IFSnap.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "4"
+            endingLineNumber = "4"
+            landmarkName = "MimeType"
+            landmarkType = "13">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

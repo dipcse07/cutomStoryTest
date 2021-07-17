@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E6217B826A2D176009A6AE0 /* IGPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6217B726A2D176009A6AE0 /* IGPlayerView.swift */; };
+		3E6217BA26A32430009A6AE0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6217B926A32430009A6AE0 /* Extensions.swift */; };
 		3E9853F7269FD89A0065FD6D /* StoryFullVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9853F5269FD89A0065FD6D /* StoryFullVC.swift */; };
 		3E9853F8269FD89A0065FD6D /* StoryFullVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E9853F6269FD89A0065FD6D /* StoryFullVC.xib */; };
 		3EA2809D26898D23001B7A41 /* StoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA2809B26898D23001B7A41 /* StoryCollectionViewCell.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E6217B726A2D176009A6AE0 /* IGPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGPlayerView.swift; sourceTree = "<group>"; };
+		3E6217B926A32430009A6AE0 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3E9853F5269FD89A0065FD6D /* StoryFullVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryFullVC.swift; sourceTree = "<group>"; };
 		3E9853F6269FD89A0065FD6D /* StoryFullVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoryFullVC.xib; sourceTree = "<group>"; };
 		3EA2809B26898D23001B7A41 /* StoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 			children = (
 				3EAAB1E7268857F80060A1C8 /* Fonts */,
 				3EAAB1F2268857F80060A1C8 /* Models */,
+				3E6217B926A32430009A6AE0 /* Extensions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -180,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				3EB3E2FC26888E3D00B16110 /* Protocols.swift */,
+				3E6217B726A2D176009A6AE0 /* IGPlayerView.swift */,
 				3EB3E2FE26896C7C00B16110 /* CollectionView */,
 				3E9853F5269FD89A0065FD6D /* StoryFullVC.swift */,
 				3E9853F6269FD89A0065FD6D /* StoryFullVC.xib */,
@@ -346,8 +352,10 @@
 				3EAAB20B268857F80060A1C8 /* IFUser.swift in Sources */,
 				3EAAB209268857F80060A1C8 /* IFStories.swift in Sources */,
 				3EAAB1CF268856A20060A1C8 /* AppDelegate.swift in Sources */,
+				3E6217B826A2D176009A6AE0 /* IGPlayerView.swift in Sources */,
 				3E9853F7269FD89A0065FD6D /* StoryFullVC.swift in Sources */,
 				3EAAB1E3268857630060A1C8 /* Api.swift in Sources */,
+				3E6217BA26A32430009A6AE0 /* Extensions.swift in Sources */,
 				3EB3E2FD26888E3D00B16110 /* Protocols.swift in Sources */,
 				3EAAB1D1268856A20060A1C8 /* SceneDelegate.swift in Sources */,
 				3EA2809D26898D23001B7A41 /* StoryCollectionViewCell.swift in Sources */,

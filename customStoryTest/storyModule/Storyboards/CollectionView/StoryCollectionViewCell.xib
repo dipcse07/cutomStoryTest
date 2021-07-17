@@ -29,10 +29,26 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sRg-zU-meK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="921"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2-nature" translatesAutoresizingMaskIntoConstraints="NO" id="pdl-Ft-Bvv">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUh-ih-oYd" userLabel="VideoView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="921"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ejp-JF-CIC">
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="323-8r-vXd" userLabel="ImageView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="921"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2-nature" translatesAutoresizingMaskIntoConstraints="NO" id="pdl-Ft-Bvv">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="921"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="pdl-Ft-Bvv" secondAttribute="trailing" id="8y8-UY-Vyk"/>
+                                    <constraint firstItem="pdl-Ft-Bvv" firstAttribute="leading" secondItem="323-8r-vXd" secondAttribute="leading" id="Gh7-JL-XzO"/>
+                                    <constraint firstAttribute="bottom" secondItem="pdl-Ft-Bvv" secondAttribute="bottom" id="UlB-B9-xxa"/>
+                                    <constraint firstItem="pdl-Ft-Bvv" firstAttribute="top" secondItem="323-8r-vXd" secondAttribute="top" id="lvE-cq-pZK"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ejp-JF-CIC" userLabel="ProgressView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="921"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uvS-Ww-AX3">
@@ -156,14 +172,18 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="ejp-JF-CIC" secondAttribute="trailing" id="DRk-7D-r0v"/>
-                            <constraint firstAttribute="bottom" secondItem="pdl-Ft-Bvv" secondAttribute="bottom" id="M9H-yt-Hp7"/>
-                            <constraint firstAttribute="trailing" secondItem="pdl-Ft-Bvv" secondAttribute="trailing" id="MBj-9x-ABD"/>
-                            <constraint firstItem="ejp-JF-CIC" firstAttribute="top" secondItem="sRg-zU-meK" secondAttribute="top" id="MUb-Le-8w1"/>
-                            <constraint firstItem="pdl-Ft-Bvv" firstAttribute="top" secondItem="sRg-zU-meK" secondAttribute="top" id="SgI-fe-yLz"/>
-                            <constraint firstAttribute="bottom" secondItem="ejp-JF-CIC" secondAttribute="bottom" id="ou4-Fb-i8N"/>
-                            <constraint firstItem="ejp-JF-CIC" firstAttribute="leading" secondItem="sRg-zU-meK" secondAttribute="leading" id="uSw-7W-Edi"/>
-                            <constraint firstItem="pdl-Ft-Bvv" firstAttribute="leading" secondItem="sRg-zU-meK" secondAttribute="leading" id="xfT-Xk-hky"/>
+                            <constraint firstAttribute="trailing" secondItem="pUh-ih-oYd" secondAttribute="trailing" id="8cW-z3-lMk"/>
+                            <constraint firstAttribute="trailing" secondItem="ejp-JF-CIC" secondAttribute="trailing" id="Eri-56-Meg"/>
+                            <constraint firstAttribute="trailing" secondItem="323-8r-vXd" secondAttribute="trailing" id="FQo-Ks-f4c"/>
+                            <constraint firstItem="ejp-JF-CIC" firstAttribute="leading" secondItem="sRg-zU-meK" secondAttribute="leading" id="Heo-zr-Pfo"/>
+                            <constraint firstItem="pUh-ih-oYd" firstAttribute="top" secondItem="sRg-zU-meK" secondAttribute="top" id="JhK-3d-ywO"/>
+                            <constraint firstItem="ejp-JF-CIC" firstAttribute="top" secondItem="sRg-zU-meK" secondAttribute="top" id="O3k-hb-Xu5"/>
+                            <constraint firstAttribute="bottom" secondItem="323-8r-vXd" secondAttribute="bottom" id="Tv8-br-HY9"/>
+                            <constraint firstAttribute="bottom" secondItem="pUh-ih-oYd" secondAttribute="bottom" id="Uw0-D9-B3f"/>
+                            <constraint firstItem="323-8r-vXd" firstAttribute="top" secondItem="sRg-zU-meK" secondAttribute="top" id="cuz-8Q-wBv"/>
+                            <constraint firstItem="pUh-ih-oYd" firstAttribute="leading" secondItem="sRg-zU-meK" secondAttribute="leading" id="dQd-Sr-FPn"/>
+                            <constraint firstAttribute="bottom" secondItem="ejp-JF-CIC" secondAttribute="bottom" id="lY8-U0-69F"/>
+                            <constraint firstItem="323-8r-vXd" firstAttribute="leading" secondItem="sRg-zU-meK" secondAttribute="leading" id="oqB-6g-zHV"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -180,6 +200,7 @@
                 <outlet property="avatarImageView" destination="3Dl-Jz-2J8" id="SJi-3P-JZd"/>
                 <outlet property="closeButton" destination="bto-NO-LGP" id="VPW-6h-AqH"/>
                 <outlet property="countLabel" destination="0U6-N9-HQs" id="zDN-Gc-i0L"/>
+                <outlet property="imageView" destination="323-8r-vXd" id="Gtb-P4-JQZ"/>
                 <outlet property="leftIconImageView" destination="fxq-Tn-iBN" id="IN1-Vl-f3O"/>
                 <outlet property="nextButton" destination="gpq-GY-K4F" id="XiB-0N-jcv"/>
                 <outlet property="prevButton" destination="ArW-Uu-QaQ" id="czs-UN-ck4"/>
@@ -188,6 +209,7 @@
                 <outlet property="storyImageView" destination="pdl-Ft-Bvv" id="axZ-C4-ibI"/>
                 <outlet property="timeLabel" destination="QG7-r6-bL9" id="Q1G-3e-VdN"/>
                 <outlet property="topTitleLabel" destination="smY-3m-Vzg" id="7Jg-ml-sAE"/>
+                <outlet property="videoView" destination="pUh-ih-oYd" id="H1f-b6-m5h"/>
                 <outlet property="view" destination="sRg-zU-meK" id="wTF-XU-Mea"/>
             </connections>
             <point key="canvasLocation" x="134.78260869565219" y="169.08482142857142"/>
@@ -198,6 +220,9 @@
         <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

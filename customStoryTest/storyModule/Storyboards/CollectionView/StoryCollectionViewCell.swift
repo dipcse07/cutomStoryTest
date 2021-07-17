@@ -8,7 +8,8 @@
 import UIKit
 import Kingfisher
 
-class StoryCollectionViewCell: UICollectionViewCell {
+class StoryCollectionViewCell: UICollectionViewCell{
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,15 +22,22 @@ class StoryCollectionViewCell: UICollectionViewCell {
         didSet{
             self.setupViewWillAppear()
             print("story count after Passing story",story.snapsInSingleStory?.count)
+            
         }
     }
-    
+    //Identifiers
+    fileprivate let snapViewTagIndicator: Int = 8
     @IBOutlet var closeButton: UIButton! {
         didSet {
             self.closeButton.addTarget(self, action: #selector(closeButtonAction), for: .touchUpInside)
         }
     }
     
+    
+    
+    
+    @IBOutlet weak var videoView: UIView!
+    @IBOutlet weak var imageView: UIView!
     @IBOutlet weak var view: UIView!
     
     @IBOutlet var progressViewHolder: UIView!
@@ -114,16 +122,24 @@ class StoryCollectionViewCell: UICollectionViewCell {
         self.topTitleLabel.text = story.user.userName
         
         if let storySnaps = story.snapsInSingleStory, !story!.isSeen {
+        
             for storySnap in storySnaps {
                 print(storySnap)
                 if !storySnap.isSeen{
-                   
+                    if storySnap.kind != MimeType.video {
+                        
+                        imageView.isHidden = false
                     let singleStoryImage = storySnap.storySnapUrl
                     self.storyImageView.kf.indicatorType = .activity
                     self.storyImageView.kf.setImage(with: URL(string: singleStoryImage), placeholder: nil , options: nil, completionHandler:  {  (_) in
                         self.fullScreenStoryDelegateForCell?.snapDidAppear(currentSnapInProgress: storySnap)
                     })
                 break
+                    
+                    }else {
+                        imageView.isHidden = true
+                        break
+                    }
                     
                 } else {
                     
@@ -219,12 +235,21 @@ class StoryCollectionViewCell: UICollectionViewCell {
             if index > 0 {
                 self.fullScreenStoryDelegateForCell?.snapDidDisappear(previousSnap: snaps[index - 1])
             }
-        let storyImageLink = snaps[index].storySnapUrl
-        
-        
-        self.storyImageView.kf.setImage(with: URL(string: storyImageLink), placeholder:  nil , options: nil) { (_) in
+            let snap = snaps[index]
+            print(snap.kind)
+            if snap.kind != MimeType.video {
+            imageView.isHidden = false
+            let storyImageLink = snap.storySnapUrl
+          self.storyImageView.kf.setImage(with: URL(string: storyImageLink), placeholder:  nil , options: nil) { (_) in
             self.fullScreenStoryDelegateForCell?.snapDidAppear(currentSnapInProgress: snaps[index] )
         }
+                
+            } else {
+                imageView.isHidden = true
+                
+                
+            }
+            
             let nextSnapIndex = index + 1
             if nextSnapIndex < snaps.count {
                 fullScreenStoryDelegateForCell?.snapWillAppear(nextSnap: snaps[nextSnapIndex])
@@ -400,4 +425,45 @@ class StoryCollectionViewCell: UICollectionViewCell {
     }
     
     
+}
+
+
+extension StoryCollectionViewCell {
+    
+    private func createVideoView() -> IGPlayerView {
+        let videoView = IGPlayerView.init(frame: CGRect(x: 0, y: 0, width: videoView.frame.width, height: videoView.frame.height))
+       videoView.tag = snapIndex + snapViewTagIndicator
+        videoView.playerObserverDelegate = self
+        self.videoView.addSubview(videoView)
+        return videoView
+    }
+    
+    private func startPlayer(videoView: IGPlayerView, with url: String) {
+        if self.videoView.subviews.count > 0 {
+            if story.isWholeStoryViewed == true {
+                let videoResource = VideoResource(filePath: url)
+                videoView.play(with: videoResource)
+            }
+        }
+    }
+}
+
+
+extension StoryCollectionViewCell:  IGPlayerObserver {
+    func didStartPlaying() {
+        
+    }
+    
+    func didCompletePlay() {
+        
+    }
+    
+    func didTrack(progress: Float) {
+        
+    }
+    
+    func didFailed(withError error: String, for url: URL?) {
+        
+    }
+
 }
