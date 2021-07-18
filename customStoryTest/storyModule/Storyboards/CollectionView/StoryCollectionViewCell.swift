@@ -124,9 +124,10 @@ class StoryCollectionViewCell: UICollectionViewCell{
         if let storySnaps = story.snapsInSingleStory, !story!.isSeen {
         
             for storySnap in storySnaps {
-                print(storySnap)
+                print(storySnap.kind)
                 if !storySnap.isSeen{
                     if storySnap.kind != MimeType.video {
+                        
                         
                         imageView.isHidden = false
                     let singleStoryImage = storySnap.storySnapUrl
@@ -138,6 +139,15 @@ class StoryCollectionViewCell: UICollectionViewCell{
                     
                     }else {
                         imageView.isHidden = true
+                        debugPrint(storySnap.storySnapUrl)
+                        if let videoView = getVideoView(with: self.snapIndex) {
+                            print("start player should not start from here")
+                            startPlayer(videoView: videoView, with: storySnap.storySnapUrl)
+                        }else {
+                            print("start player should start from here")
+                            let videoView = createVideoView()
+                            startPlayer(videoView: videoView, with: storySnap.storySnapUrl)
+                        }
                         break
                     }
                     
@@ -246,6 +256,13 @@ class StoryCollectionViewCell: UICollectionViewCell{
                 
             } else {
                 imageView.isHidden = true
+                debugPrint(snap.storySnapUrl)
+                if let videoView = getVideoView(with: snapIndex) {
+                    startPlayer(videoView: videoView, with: snap.storySnapUrl)
+                }else {
+                    let videoView = createVideoView()
+                    startPlayer(videoView: videoView, with: snap.storySnapUrl)
+                }
                 
                 
             }
@@ -319,7 +336,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
     
     @objc func prevAction() {
         
-        if self.currentViewingStoryIndex > 0 {
+       
             if self.snapIndex > 0 {
                 self.topProgressViews[snapIndex].progress = 0.0
                 self.snapIndex -= 1
@@ -344,7 +361,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
             }
             
             
-        }
+        
     }
     
     
@@ -431,24 +448,33 @@ class StoryCollectionViewCell: UICollectionViewCell{
 extension StoryCollectionViewCell {
     
     private func createVideoView() -> IGPlayerView {
+        print("creating New Video View")
         let videoView = IGPlayerView.init(frame: CGRect(x: 0, y: 0, width: videoView.frame.width, height: videoView.frame.height))
        videoView.tag = snapIndex + snapViewTagIndicator
         videoView.playerObserverDelegate = self
+        print(videoView.subviews.count)
+        print(self.videoView.subviews.count)
         self.videoView.addSubview(videoView)
+        print(self.videoView.subviews.count)
         return videoView
     }
     
     private func startPlayer(videoView: IGPlayerView, with url: String) {
+        print("Starting to Play")
+        print(self.videoView.subviews.count)
         if self.videoView.subviews.count > 0 {
-            if story.isWholeStoryViewed == true {
+            if story.isWholeStoryViewed == false {
                 let videoResource = VideoResource(filePath: url)
+                debugPrint(videoResource)
                 videoView.play(with: videoResource)
             }
         }
     }
     
     private func getVideoView(with index: Int) -> IGPlayerView? {
+        print("Starting to get the Video View")
         if let videoView = self.videoView.subviews.filter({$0.tag == index + snapViewTagIndicator}).first as? IGPlayerView {
+            print(videoView.subviews.count)
             return videoView
         }
         return nil
@@ -458,6 +484,7 @@ extension StoryCollectionViewCell {
 
 extension StoryCollectionViewCell:  IGPlayerObserver {
     func didStartPlaying() {
+        print("startplaying")
         
     }
     
@@ -466,6 +493,7 @@ extension StoryCollectionViewCell:  IGPlayerObserver {
     }
     
     func didTrack(progress: Float) {
+    print(progress)
         
     }
     
