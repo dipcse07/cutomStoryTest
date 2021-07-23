@@ -86,6 +86,8 @@ class StoryCollectionViewCell: UICollectionViewCell{
     public var showBlurEffectOnFullScreenView = true
     private let pangestureVelocity:CGFloat = 1000
     var fullScreenStoryDelegateForCell: FullScreenSnapDelegate?
+    var videoProgressDuration:Float = 0.0
+    var videoDuration:Float!
     
     
     
@@ -355,9 +357,9 @@ class StoryCollectionViewCell: UICollectionViewCell{
                 self.snapIndex = 0
                 self.timerProgressStartAt = 0.0
                 currentViewingStoryIndex -= 1
-                //                UIView.animate(withDuration: 0.2) {
-                //                    self.setupViewWillAppear()
-                //                }
+                                UIView.animate(withDuration: 0.2) {
+                                    self.setupViewWillAppear()
+                                }
             }
             
             
@@ -380,9 +382,9 @@ class StoryCollectionViewCell: UICollectionViewCell{
         //self.countLabel.text = "\(currentViewingStoryIndex+1)\n\(storyImageIndex+1)"
         if timerProgressStartAt > 1.0 {
             //self.closeButtonAction()
-            let imagesInCurrentStory = story.snapsInSingleStory
+            let snapsInCurrentStory = story.snapsInSingleStory
             
-            if self.snapIndex < imagesInCurrentStory!.count-1 {
+            if self.snapIndex < snapsInCurrentStory!.count-1 {
                 
                 self.snapIndex += 1
                 self.timerProgressStartAt = 0.0
@@ -449,13 +451,14 @@ extension StoryCollectionViewCell {
     
     private func createVideoView() -> IGPlayerView {
         print("creating New Video View")
-        let videoView = IGPlayerView.init(frame: CGRect(x: 0, y: 0, width: videoView.frame.width, height: videoView.frame.height))
+        let videoView = IGPlayerView.init(frame: self.videoView.bounds)
        videoView.tag = snapIndex + snapViewTagIndicator
         videoView.playerObserverDelegate = self
         print(videoView.subviews.count)
         print(self.videoView.subviews.count)
         self.videoView.addSubview(videoView)
         print(self.videoView.subviews.count)
+        self.view.setNeedsLayout()
         return videoView
     }
     
@@ -475,6 +478,7 @@ extension StoryCollectionViewCell {
         print("Starting to get the Video View")
         if let videoView = self.videoView.subviews.filter({$0.tag == index + snapViewTagIndicator}).first as? IGPlayerView {
             print(videoView.subviews.count)
+            self.view.setNeedsLayout()
             return videoView
         }
         return nil
@@ -482,11 +486,42 @@ extension StoryCollectionViewCell {
 }
 
 
-extension StoryCollectionViewCell:  IGPlayerObserver {
+extension StoryCollectionViewCell: IGPlayerObserver {
     func didStartPlaying() {
         print("startplaying")
+        if let videoView = getVideoView(with: snapIndex){
+            print("got Viedeo view")
+            //let videoView = scrollview.subviews.filter{v in v.tag == snapIndex + snapViewTagIndicator}.first as? IGPlayerView
+            if videoView.error == nil  {
+                print()
+//                if let holderView = getProgressIndicatorView(with: snapIndex),
+//                    let progressView = getProgressView(with: snapIndex) {
+//                    progressView.story_identifier = self.story?.internalIdentifier
+//                    progressView.snapIndex = snapIndex
+                    if let duration = videoView.currentItem?.asset.duration {
+                        print(duration.value, duration.seconds)
+                        if Float(duration.value) > 0 {
+                            print("video duratjion: ", Float(duration.value))
+//                            progressView.start(with: duration.seconds, width: holderView.frame.width, completion: {(identifier, snapIndex, isCancelledAbruptly) in
+//                                if isCancelledAbruptly == false {
+//                                    self.videoSnapIndex = snapIndex
+//                                    self.stopPlayer()
+//                                    self.didCompleteProgress()
+//                                } else {
+//                                    self.videoSnapIndex = snapIndex
+//                                    self.stopPlayer()
+//                                }
+//                            })
+                        }else {
+                            debugPrint("Player error: Unable to play the video")
+                        }
+                    }
+                }
+            }
+        }
+    
         
-    }
+    
     
     func didCompletePlay() {
         
