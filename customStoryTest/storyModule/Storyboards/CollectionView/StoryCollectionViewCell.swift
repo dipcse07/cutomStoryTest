@@ -302,45 +302,21 @@ class StoryCollectionViewCell: UICollectionViewCell {
             if self.snapIndex < snapsInCurrentStory!.count {
                 
                 print("current snap Index: ", self.snapIndex)
-               // self.topProgressViews[snapIndex].progress = 1.0
-                
-    
-                
+
                 UIView.animate(withDuration: 0.2) {
                     self.updateSnap(index: self.snapIndex)
                 }
-                
-               
-                
-            }
+ }
             else {
-                self.progressTimer.invalidate()
                 fullScreenStoryDelegateForCell?.snapClosed(isClosed: false, atStroy: story, forStoryIndexPath: storyIndexPath, forSnap: (story.snapsInSingleStory?.last)!)
                 print("going to next story")
-                //                UIView.animate(withDuration: 0.2) {
-                //                    self.setupViewWillAppear()
-                //                }
           }
             
         }
-//        else {
-//            if self.snapIndex < imagesInCurrentStory!.count-1 {
-//
-//            }
-//            else {
-//                currentViewingStoryIndex = 0
-//               // self.progressTimer.invalidate()
-//                fullScreenStoryDelegateForCell?.snapClosed(isClosed: false, atStroy: story, forStoryIndexPath: storyIndexPath, forSnap: (story.snapsInSingleStory?.last)!)
-//                print("going to next story")
-//
-//            }
-//
-//        }
 
     
     
     @objc func prevAction() {
-        
             if self.snapIndex > 0 {
                 self.topProgressViews[snapIndex].progress = 0.0
                 self.snapIndex -= 1
@@ -358,29 +334,11 @@ class StoryCollectionViewCell: UICollectionViewCell {
             else {
                 self.snapIndex = 0
                 self.timerProgressStartAt = 0.0
-                //                UIView.animate(withDuration: 0.2) {
-                //                    self.setupViewWillAppear()
-                //                }
+              
             }
-            
-            
-    
+
     }
-    
-    
-    
-    
-//    private func initTimerProgress() {
-//
-//        self.progressTimer.invalidate()
-//        self.progressTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(timerProgressAction), userInfo: nil, repeats: true)
-//        self.progressTimer.fire()
-//    }
-    
-    
-    
-   
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.first != nil {
             //print("Finger touched!")
