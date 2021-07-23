@@ -223,52 +223,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @objc func timerProgressAction() {
-        //self.countLabel.text = "\(currentViewingStoryIndex+1)\n\(storyImageIndex+1)"
-        if timerProgressStartAt > 1.0 {
-            //self.closeButtonAction()
-            let snapsInCurrentStory = story.snapsInSingleStory
-            print("snaps In current sotry for timer: ", snapsInCurrentStory?.count)
-            print("snap In current Story for timer: ", self.snapIndex)
-            if self.snapIndex < snapsInCurrentStory!.count  {
-                print("snap In current Story for timer: ", self.snapIndex)
-                
-                self.timerProgressStartAt = 0.0
-                UIView.animate(withDuration: 0.2) {
-                    self.updateSnap(index: self.snapIndex)
-                }
-                
-                self.timerProgressStartAt += self.progressRate
-                
-                self.snapIndex = snapIndex + 1
-            }
-            else {
-                
-                for progressView in topProgressViews {
-                    progressView.progress = 0.0
-                }
-                
-                self.initProgressViews()
-                print("going Next Action")
-               self.nextAction()
-                
-            }
-            
-        }
-        else {
-            if snapIndex < topProgressViews.count {
-                
-                self.topProgressViews[snapIndex].progress = Float(timerProgressStartAt)
-                self.timerProgressStartAt += self.progressRate
-                print("current index for timer in the else condition: ", self.snapIndex)
-                
-            }else{}
-            
-            
-        }
-        
-        
-    }
     
     
     func initeProgressViewAnimation () {
@@ -342,7 +296,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.first != nil {
             //print("Finger touched!")
-            self.progressTimer.invalidate()
+           // self.progressTimer.invalidate()
         }
     }
     
@@ -356,7 +310,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.first != nil {
             //print("Touch Move")
-            self.progressTimer.invalidate()
+            //self.progressTimer.invalidate()
         }
     }
     
