@@ -19,7 +19,8 @@ class StoryCollectionViewCell: UICollectionViewCell {
     }
     public var story: IFSingleStory! {
         didSet{
-            self.setupViewWillAppear()
+         
+            setupViewWillAppear()
             print("story count after Passing story",story.snapsInSingleStory?.count)
         }
     }
@@ -63,9 +64,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
     private var snapIndex = 0
     private var currentSnapIndex = 0
     public var igStories: IFStories!
-    private var snapCount = 0
-    //  private var stories = [IGStory]()
-    private var nextSnapIndex = 0
     public var storyIndexPath: IndexPath!
     private var firstUnseenSnapShowed = false
 
@@ -77,19 +75,11 @@ class StoryCollectionViewCell: UICollectionViewCell {
     public var showBlurEffectOnFullScreenView = true
     private let pangestureVelocity:CGFloat = 1000
     var fullScreenStoryDelegateForCell: FullScreenSnapDelegate?
-    
-    
-    
-    
-    //    override var prefersStatusBarHidden: Bool {
-    //        return true
-    //    }
-    
+
     
     private func setupViewDidLoad() {
         //self.stories = igStories.stories
         self.avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width * 0.50
-        //self.storyImageView.layer.cornerRadius = 20.0
         self.storyImageView.backgroundColor = .black
         
         
@@ -104,7 +94,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupViewWillAppear() {
-        
+        self.initProgressViews()
         self.avatarImageView.transform = .init(scaleX: 0.50, y: 0.50)
         self.topTitleLabel.transform = .init(scaleX: 1, y: 0.85)
         
@@ -116,15 +106,16 @@ class StoryCollectionViewCell: UICollectionViewCell {
             var snapIndexCount = 0
             for storySnap in storySnaps {
                 if !storySnap.isSeen{
+                    
                     snapIndex = snapIndexCount
-                    print("current snap index in timer for set View will appear: ", self.snapIndex)
+                   // self.initTimerProgress()
+                    print("current snap index in timer for set View will appear for \(story.user.userName): ", self.snapIndex)
                     let singleStoryImage = storySnap.storySnapUrl
                     self.storyImageView.kf.indicatorType = .activity
                     self.storyImageView.kf.setImage(with: URL(string: singleStoryImage), placeholder: nil , options: nil, completionHandler:  {  (_) in
+                        self.initeProgressViewAnimation()
                         self.fullScreenStoryDelegateForCell?.snapDidAppear(currentSnapInProgress: storySnap)
-                        self.initProgressViews()
-                        self.initTimerProgress()
-                        
+
                     })
                     firstUnseenSnapShowed = true
                    // self.snapIndex = self.snapIndex + 1
@@ -144,8 +135,8 @@ class StoryCollectionViewCell: UICollectionViewCell {
                 let singleStoryImage  = storySnap.storySnapUrl
                 self.storyImageView.kf.indicatorType = .activity
                 self.storyImageView.kf.setImage(with: URL(string: singleStoryImage), placeholder: nil , options: nil) { (_) in
-                    self.initProgressViews()
-                    self.initTimerProgress()
+
+                    self.initeProgressViewAnimation()
                     self.fullScreenStoryDelegateForCell?.snapDidAppear(currentSnapInProgress: storySnap)
                 }
             }
@@ -171,9 +162,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
                 //self.topTitleLabel.transform = .identity
             }
         }
-        
 
-        
     }
     
     
@@ -219,6 +208,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
         
         
         self.storyImageView.kf.setImage(with: URL(string: storySnapUrl), placeholder:  nil , options: nil) { (_) in
+            self.initeProgressViewAnimation()
             self.fullScreenStoryDelegateForCell?.snapDidAppear(currentSnapInProgress: snaps[index] )
         }
             self.currentSnapIndex = index
@@ -233,6 +223,69 @@ class StoryCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    @objc func timerProgressAction() {
+        //self.countLabel.text = "\(currentViewingStoryIndex+1)\n\(storyImageIndex+1)"
+        if timerProgressStartAt > 1.0 {
+            //self.closeButtonAction()
+            let snapsInCurrentStory = story.snapsInSingleStory
+            print("snaps In current sotry for timer: ", snapsInCurrentStory?.count)
+            print("snap In current Story for timer: ", self.snapIndex)
+            if self.snapIndex < snapsInCurrentStory!.count  {
+                print("snap In current Story for timer: ", self.snapIndex)
+                
+                self.timerProgressStartAt = 0.0
+                UIView.animate(withDuration: 0.2) {
+                    self.updateSnap(index: self.snapIndex)
+                }
+                
+                self.timerProgressStartAt += self.progressRate
+                
+                self.snapIndex = snapIndex + 1
+            }
+            else {
+                
+                for progressView in topProgressViews {
+                    progressView.progress = 0.0
+                }
+                
+                self.initProgressViews()
+                print("going Next Action")
+               self.nextAction()
+                
+            }
+            
+        }
+        else {
+            if snapIndex < topProgressViews.count {
+                
+                self.topProgressViews[snapIndex].progress = Float(timerProgressStartAt)
+                self.timerProgressStartAt += self.progressRate
+                print("current index for timer in the else condition: ", self.snapIndex)
+                
+            }else{}
+            
+            
+        }
+        
+        
+    }
+    
+    
+    func initeProgressViewAnimation () {
+        UIView.animate(withDuration: 0.0, animations: {
+            self.topProgressViews[self.snapIndex].layoutIfNeeded()
+         }, completion: { finished in
+            self.topProgressViews[self.snapIndex].progress = 1.0
+
+            UIView.animate(withDuration: 5.0, delay: 0.0, options: [.curveLinear], animations: {
+                self.topProgressViews[self.snapIndex].layoutIfNeeded()
+             }, completion: { finished in
+                 print("animation completed")
+                self.snapIndex = self.snapIndex + 1
+                self.nextAction()
+             })
+         })
+    }
     
     
     
@@ -246,14 +299,12 @@ class StoryCollectionViewCell: UICollectionViewCell {
         
         let snapsInCurrentStory = story.snapsInSingleStory
         print("current snap for next Acction: ", self.snapIndex)
-            if self.snapIndex < snapsInCurrentStory!.count{
+            if self.snapIndex < snapsInCurrentStory!.count {
                 
                 print("current snap Index: ", self.snapIndex)
-                self.topProgressViews[snapIndex].progress = 1.0
+               // self.topProgressViews[snapIndex].progress = 1.0
                 
-                //
-                self.timerProgressStartAt = 0.0
-                self.timerProgressStartAt += self.progressRate
+    
                 
                 UIView.animate(withDuration: 0.2) {
                     self.updateSnap(index: self.snapIndex)
@@ -319,59 +370,16 @@ class StoryCollectionViewCell: UICollectionViewCell {
     
     
     
-    private func initTimerProgress() {
-        
-        self.progressTimer.invalidate()
-        self.progressTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(timerProgressAction), userInfo: nil, repeats: true)
-        self.progressTimer.fire()
-    }
+//    private func initTimerProgress() {
+//
+//        self.progressTimer.invalidate()
+//        self.progressTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(timerProgressAction), userInfo: nil, repeats: true)
+//        self.progressTimer.fire()
+//    }
     
     
     
-    @objc func timerProgressAction() {
-        //self.countLabel.text = "\(currentViewingStoryIndex+1)\n\(storyImageIndex+1)"
-        if timerProgressStartAt > 1.0 {
-            //self.closeButtonAction()
-            let snapsInCurrentStory = story.snapsInSingleStory
-            print("snaps In current sotry for timer: ", snapsInCurrentStory?.count)
-            
-            if self.snapIndex < snapsInCurrentStory!.count {
-                print("snap In current Story for timer: ", self.snapIndex)
-                
-                self.timerProgressStartAt = 0.0
-                UIView.animate(withDuration: 0.2) {
-                    self.updateSnap(index: self.snapIndex)
-                }
-                
-                self.timerProgressStartAt += self.progressRate
-                self.snapIndex = snapIndex + 1
-               
-            }
-            else {
-               
-                for progressView in topProgressViews {
-                    progressView.progress = 0.0
-                }
-                
-                self.initProgressViews()
-                print("going Next Action from timer")
-               self.nextAction()
-                
-            }
-            
-        }
-        else {
-            if snapIndex < topProgressViews.count {
-                self.topProgressViews[snapIndex].progress = Float(timerProgressStartAt)
-                self.timerProgressStartAt += self.progressRate
-            }
-            
-            
-        }
-        
-        
-    }
-    
+   
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.first != nil {
@@ -383,7 +391,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.first != nil {
             //print("finger is not touching.")
-            self.initTimerProgress()
+            //self.initTimerProgress()
         }
     }
     
