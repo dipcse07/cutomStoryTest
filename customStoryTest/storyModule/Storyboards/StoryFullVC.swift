@@ -48,10 +48,10 @@ public class StoryFullVC: UIViewController {
         if let coll  = storyCollectionView{
             for cell in coll.visibleCells {
                 let indexPath: IndexPath? = coll.indexPath(for: cell)
-                if ((indexPath?.row)!  < stories.count - 1){
+                if ((indexPath?.item)!  < stories.count - 1){
                     let indexPath1: IndexPath?
                 
-                    indexPath1 = IndexPath.init(row: (indexPath?.row)! + 1, section: (indexPath?.section)!)
+                    indexPath1 = IndexPath.init(row: (indexPath?.item)! + 1, section: (indexPath?.section)!)
                    if indexPath1!.item > 0 {
                     let prevIndex = indexPath1!.item - 1
                     delegate?.storyDidDisAppear(previousStory: stories[prevIndex] )
@@ -68,7 +68,7 @@ public class StoryFullVC: UIViewController {
 //                    indexPath1 = IndexPath.init(row: 0, section: (indexPath?.section)!)
 //                    coll.scrollToItem(at: indexPath1!, at: .left, animated: true)
                     
-                   // self.dismiss(animated: true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                 }
                 
             }
@@ -151,7 +151,7 @@ extension StoryFullVC: FullScreenSnapDelegate{
         if forStoryIndexPath.item <  self.stories.count - 1, !isClosed {
             print("Auto Scrolling to next Story Cell")
             scrollAutomatically()
-        }else {
+        }else if isClosed {
         
             print("Story CollectionViewController Dissmissed", forSnap.storySnapUrl)
         self.dismiss(animated: true)
