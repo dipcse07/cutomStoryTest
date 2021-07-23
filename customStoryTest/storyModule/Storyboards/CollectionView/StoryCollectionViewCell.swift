@@ -67,10 +67,10 @@ class StoryCollectionViewCell: UICollectionViewCell {
     public var storyIndexPath: IndexPath!
     private var firstUnseenSnapShowed = false
 
-    private var progressTimer = Timer()
-    private var automaticDissappearAfterSeconds = 5.0
-    private var timerProgressStartAt = 0.0
-    private var progressRate = 0.0
+//    private var progressTimer = Timer()
+//    private var automaticDissappearAfterSeconds = 5.0
+//    private var timerProgressStartAt = 0.0
+//    private var progressRate = 0.0
     private var topProgressViews = [UIProgressView]()
     public var showBlurEffectOnFullScreenView = true
     private let pangestureVelocity:CGFloat = 1000
@@ -98,7 +98,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
         self.avatarImageView.transform = .init(scaleX: 0.50, y: 0.50)
         self.topTitleLabel.transform = .init(scaleX: 1, y: 0.85)
         
-        self.progressRate = automaticDissappearAfterSeconds/1000
+       // self.progressRate = automaticDissappearAfterSeconds/1000
         
         self.topTitleLabel.text = story.user.userName
         
@@ -149,8 +149,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
             
         }
         self.timeLabel.text = story.lastUpdated
-
-        self.timerProgressStartAt = 0.0
         
         UIView.animate(withDuration: 0.5) {
             self.avatarImageView.transform = .init(scaleX: 1.25, y: 1.25)
@@ -244,7 +242,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
     
     
     @objc func closeButtonAction() {
-        self.progressTimer.invalidate()
         fullScreenStoryDelegateForCell?.snapClosed(isClosed:true, atStroy: story, forStoryIndexPath: storyIndexPath, forSnap: story.snapsInSingleStory![self.currentSnapIndex])
         
     }
@@ -271,23 +268,20 @@ class StoryCollectionViewCell: UICollectionViewCell {
     
     
     @objc func prevAction() {
-            if self.snapIndex > 0 {
-                self.topProgressViews[snapIndex].progress = 0.0
-                self.snapIndex -= 1
-                self.topProgressViews[snapIndex].progress = 0.0
-                self.timerProgressStartAt = 0.0
-                
-                
+        var previousSnapCount = currentSnapIndex
+            if previousSnapCount > 0 {
+                self.topProgressViews[previousSnapCount].progress = 0.0
+                previousSnapCount -= 1
+                self.topProgressViews[previousSnapCount].progress = 0.0
+                self.snapIndex = previousSnapCount
                 
                 UIView.animate(withDuration: 0.2) {
                     self.updateSnap(index: self.snapIndex)
                 }
-                
-                self.timerProgressStartAt += self.progressRate
+                previousSnapCount -= 1
             }
             else {
                 self.snapIndex = 0
-                self.timerProgressStartAt = 0.0
               
             }
 
