@@ -16,7 +16,7 @@ protocol FullScreenSnapDelegate {
     
     func profileImageTapped(userInfo: IFUser?)
     
-    func snapClosed(isClosed: Bool, atStroy: IFSingleStory, forStoryIndexPath:IndexPath, forSnap: IFSnap)
+    func snapClosed(isClosed: Bool,goToNextStory:Bool, atStroy: IFSingleStory, forStoryIndexPath:IndexPath, forSnap: IFSnap)
     
     
 }

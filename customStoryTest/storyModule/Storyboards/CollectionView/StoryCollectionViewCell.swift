@@ -242,7 +242,7 @@ class StoryCollectionViewCell: UICollectionViewCell {
     
     
     @objc func closeButtonAction() {
-        fullScreenStoryDelegateForCell?.snapClosed(isClosed:true, atStroy: story, forStoryIndexPath: storyIndexPath, forSnap: story.snapsInSingleStory![self.currentSnapIndex])
+        fullScreenStoryDelegateForCell?.snapClosed(isClosed:true, goToNextStory: false, atStroy: story, forStoryIndexPath: storyIndexPath, forSnap: story.snapsInSingleStory![self.currentSnapIndex])
         
     }
     
@@ -259,7 +259,8 @@ class StoryCollectionViewCell: UICollectionViewCell {
                 }
  }
             else {
-                fullScreenStoryDelegateForCell?.snapClosed(isClosed: false, atStroy: story, forStoryIndexPath: storyIndexPath, forSnap: (story.snapsInSingleStory?.last)!)
+               
+                fullScreenStoryDelegateForCell?.snapClosed(isClosed: false, goToNextStory: true, atStroy: story, forStoryIndexPath: storyIndexPath, forSnap: (story.snapsInSingleStory?.last)!)
                 print("going to next story")
           }
             
@@ -282,6 +283,8 @@ class StoryCollectionViewCell: UICollectionViewCell {
             }
             else {
                 self.snapIndex = 0
+                
+                fullScreenStoryDelegateForCell?.snapClosed(isClosed:false, goToNextStory: false, atStroy: story, forStoryIndexPath: storyIndexPath, forSnap: story.snapsInSingleStory![self.currentSnapIndex])
               
             }
     }
