@@ -284,7 +284,6 @@ class StoryCollectionViewCell: UICollectionViewCell {
                 self.snapIndex = 0
               
             }
-
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
