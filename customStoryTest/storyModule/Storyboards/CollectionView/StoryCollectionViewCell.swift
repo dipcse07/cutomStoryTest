@@ -115,7 +115,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
     }
     
     private func setupViewWillAppear() {
-        
+        self.initProgressViews()
         self.avatarImageView.transform = .init(scaleX: 0.50, y: 0.50)
         self.topTitleLabel.transform = .init(scaleX: 1, y: 0.85)
         
@@ -202,10 +202,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
                 //self.topTitleLabel.transform = .identity
             }
         }
-        
-        self.initProgressViews()
-        self.initTimerProgress()
-        
+
     }
     
     
@@ -243,6 +240,9 @@ class StoryCollectionViewCell: UICollectionViewCell{
     
     
     private func updateSnap(index: Int) {
+        
+        self.setNeedsLayout()
+        self.setNeedsDisplay()
         if let snaps = story.snapsInSingleStory {
             if index > 0 {
                 self.fullScreenStoryDelegateForCell?.snapDidDisappear(previousSnap: snaps[index - 1])
@@ -358,8 +358,10 @@ class StoryCollectionViewCell: UICollectionViewCell{
                 self.timerProgressStartAt = 0.0
                 currentViewingStoryIndex -= 1
                                 UIView.animate(withDuration: 0.2) {
-                                    self.setupViewWillAppear()
+                                   // self.setupViewWillAppear()
+                                    
                                 }
+                fullScreenStoryDelegateForCell?.goToPreviousStroy(atStroy: story, forStoryIndexPath: storyIndexPath, forSnap: (story.snapsInSingleStory?.first)!)
             }
             
             
@@ -391,8 +393,10 @@ class StoryCollectionViewCell: UICollectionViewCell{
                 UIView.animate(withDuration: 0.2) {
                     self.updateSnap(index: self.snapIndex)
                 }
-                
-                self.timerProgressStartAt += self.progressRate
+                if !imageView.isHidden{
+                    self.timerProgressStartAt += self.progressRate}else {
+                        self.timerProgressStartAt += Double(self.videoProgressDuration)
+                    }
             }
             else {
                 //                self.timerProgressStartAt = 0.0
@@ -502,6 +506,7 @@ extension StoryCollectionViewCell: IGPlayerObserver {
                         print(duration.value, duration.seconds)
                         if Float(duration.value) > 0 {
                             print("video duratjion: ", Float(duration.value))
+                            self.videoDuration = Float(duration.seconds)
 //                            progressView.start(with: duration.seconds, width: holderView.frame.width, completion: {(identifier, snapIndex, isCancelledAbruptly) in
 //                                if isCancelledAbruptly == false {
 //                                    self.videoSnapIndex = snapIndex
@@ -529,6 +534,7 @@ extension StoryCollectionViewCell: IGPlayerObserver {
     
     func didTrack(progress: Float) {
     print(progress)
+        self.videoProgressDuration = (progress / videoDuration)
         
     }
     
