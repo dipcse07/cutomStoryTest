@@ -109,6 +109,12 @@ extension StoryFullVC:  UICollectionViewDelegate {
         
     }
     
+    public func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        debugPrint(cell, indexPath.item)
+    }
+    
+    
+    
    
     
 }

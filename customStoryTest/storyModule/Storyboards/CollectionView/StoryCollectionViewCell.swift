@@ -87,7 +87,8 @@ class StoryCollectionViewCell: UICollectionViewCell{
     private let pangestureVelocity:CGFloat = 1000
     var fullScreenStoryDelegateForCell: FullScreenSnapDelegate?
     var videoProgressDuration:Float = 0.0
-    var videoDuration:Float!
+    var videoDuration:Float = 1.0
+    var playingVideoView:IGPlayerView!
     
     
     
@@ -132,10 +133,12 @@ class StoryCollectionViewCell: UICollectionViewCell{
                         
                         
                         imageView.isHidden = false
+                        
                     let singleStoryImage = storySnap.storySnapUrl
                     self.storyImageView.kf.indicatorType = .activity
                     self.storyImageView.kf.setImage(with: URL(string: singleStoryImage), placeholder: nil , options: nil, completionHandler:  {  (_) in
                         self.fullScreenStoryDelegateForCell?.snapDidAppear(currentSnapInProgress: storySnap)
+                        self.initTimerProgress()
                     })
                 break
                     
@@ -144,11 +147,15 @@ class StoryCollectionViewCell: UICollectionViewCell{
                         debugPrint(storySnap.storySnapUrl)
                         if let videoView = getVideoView(with: self.snapIndex) {
                             print("start player should not start from here")
+                            self.playingVideoView = videoView
                             startPlayer(videoView: videoView, with: storySnap.storySnapUrl)
+                            self.initTimerProgress()
                         }else {
                             print("start player should start from here")
                             let videoView = createVideoView()
+                            self.playingVideoView = videoView
                             startPlayer(videoView: videoView, with: storySnap.storySnapUrl)
+                            self.initTimerProgress()
                         }
                         break
                     }
@@ -294,6 +301,10 @@ class StoryCollectionViewCell: UICollectionViewCell{
         
         if self.currentViewingStoryIndex < imagesInCurrentStory!.count-1 {
             
+            if playingVideoView != nil {
+                playingVideoView.stop()
+            }
+            
             
             if self.snapIndex < imagesInCurrentStory!.count-1 {
                 
@@ -338,8 +349,12 @@ class StoryCollectionViewCell: UICollectionViewCell{
     
     @objc func prevAction() {
         
+        if playingVideoView != nil {
+            playingVideoView.stop()
+        }
        
             if self.snapIndex > 0 {
+                
                 self.topProgressViews[snapIndex].progress = 0.0
                 self.snapIndex -= 1
                 self.topProgressViews[snapIndex].progress = 0.0
