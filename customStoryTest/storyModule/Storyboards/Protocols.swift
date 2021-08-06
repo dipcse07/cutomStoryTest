@@ -18,7 +18,7 @@ protocol FullScreenSnapDelegate {
     
     func snapClosed(isClosed: Bool, atStroy: IFSingleStory, forStoryIndexPath:IndexPath, forSnap: IFSnap)
     
-    func goToPreviousStroy(atStroy: IFSingleStory, forStoryIndexPath:IndexPath, forSnap: IFSnap)
+    func goToPreviousStroy(atStroy: IFSingleStory, forStoryIndexPath:IndexPath, forCell:StoryCollectionViewCell, forSnap: IFSnap)
     
     
 }

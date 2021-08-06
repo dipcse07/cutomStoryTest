@@ -76,9 +76,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
     private var nextSnapIndex = 0
     public var storyIndexPath: IndexPath!
     
-    
-    
-    private var progressTimer = Timer()
+    var progressTimer = Timer()
     private var automaticDissappearAfterSeconds = 5.0
     private var timerProgressStartAt = 0.0
     private var progressRate = 0.0
@@ -354,7 +352,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
         }
        
             if self.snapIndex > 0 {
-                
+                self.progressTimer.invalidate()
                 self.topProgressViews[snapIndex].progress = 0.0
                 self.snapIndex -= 1
                 self.topProgressViews[snapIndex].progress = 0.0
@@ -369,14 +367,15 @@ class StoryCollectionViewCell: UICollectionViewCell{
                 self.timerProgressStartAt += self.progressRate
             }
             else {
+                self.progressTimer.invalidate()
                 self.snapIndex = 0
                 self.timerProgressStartAt = 0.0
                 currentViewingStoryIndex -= 1
                                 UIView.animate(withDuration: 0.2) {
-                                   // self.setupViewWillAppear()
+                                    self.setupViewWillAppear()
                                     
                                 }
-                fullScreenStoryDelegateForCell?.goToPreviousStroy(atStroy: story, forStoryIndexPath: storyIndexPath, forSnap: (story.snapsInSingleStory?.first)!)
+                fullScreenStoryDelegateForCell?.goToPreviousStroy(atStroy: story, forStoryIndexPath: storyIndexPath, forCell: self, forSnap: (story.snapsInSingleStory?.first)!)
             }
             
             
@@ -391,6 +390,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
         self.progressTimer.invalidate()
         self.progressTimer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(timerProgressAction), userInfo: nil, repeats: true)
         self.progressTimer.fire()
+        
     }
     
     

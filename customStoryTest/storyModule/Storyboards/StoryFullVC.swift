@@ -167,9 +167,10 @@ extension StoryFullVC: FullScreenSnapDelegate{
         //delegate.snapClosed(atStroy: atStroy, forSnap: forSnap)
     }
     
-    func goToPreviousStroy(atStroy: IFSingleStory, forStoryIndexPath:IndexPath, forSnap: IFSnap) {
+    func goToPreviousStroy(atStroy: IFSingleStory, forStoryIndexPath:IndexPath,forCell:StoryCollectionViewCell, forSnap: IFSnap) {
         print("Go to PreviousStory")
         if forStoryIndexPath.item > 0 {
+            forCell.progressTimer.invalidate()
             let indexPath = IndexPath(item: forStoryIndexPath.item - 1, section: 0)
                          storyCollectionView.scrollToItem(at: indexPath, at: .left, animated: false)
         }
