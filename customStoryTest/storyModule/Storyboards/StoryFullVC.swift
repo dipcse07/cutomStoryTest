@@ -59,6 +59,7 @@ public class StoryFullVC: UIViewController {
                     
                     delegate?.storyDidAppear(currentStoryInProgress: stories[indexPath1!.item])
                     coll.scrollToItem(at: indexPath1!, at: .right, animated: true)
+                
                     if indexPath1!.item < stories.count - 2 {
                         delegate?.storyWillAppear(nextStory: stories[indexPath1!.item + 1])
                     }
@@ -92,12 +93,19 @@ extension StoryFullVC:  UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if !onceOnly {
-              let indexToScrollTo = IndexPath(item: storyIndex , section: 0)
-              self.storyCollectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
-            delegate?.storyDidAppear(currentStoryInProgress: stories[indexToScrollTo.item])
-              onceOnly = true
-            }
+//        if !onceOnly {
+//              let indexToScrollTo = IndexPath(item: storyIndex , section: 0)
+//              self.storyCollectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
+//            delegate?.storyDidAppear(currentStoryInProgress: stories[indexToScrollTo.item])
+//              onceOnly = true
+//            }
+        
+       let currentCell = cell as! StoryCollectionViewCell
+        print(currentCell.isProgressTimerInvalidate)
+        currentCell.setupViewWillAppear()
+        
+        
+        
     }
     
 }
@@ -171,6 +179,7 @@ extension StoryFullVC: FullScreenSnapDelegate{
         print("Go to PreviousStory")
         if forStoryIndexPath.item > 0 {
             forCell.progressTimer.invalidate()
+            forCell.isProgressTimerInvalidate = true
             let indexPath = IndexPath(item: forStoryIndexPath.item - 1, section: 0)
                          storyCollectionView.scrollToItem(at: indexPath, at: .left, animated: false)
         }

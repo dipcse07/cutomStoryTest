@@ -77,6 +77,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
     public var storyIndexPath: IndexPath!
     
     var progressTimer = Timer()
+    var isProgressTimerInvalidate:Bool!
     private var automaticDissappearAfterSeconds = 5.0
     private var timerProgressStartAt = 0.0
     private var progressRate = 0.0
@@ -113,7 +114,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
         fullScreenStoryDelegateForCell?.profileImageTapped(userInfo: story.user)
     }
     
-    private func setupViewWillAppear() {
+   public  func setupViewWillAppear() {
         self.initProgressViews()
         self.avatarImageView.transform = .init(scaleX: 0.50, y: 0.50)
         self.topTitleLabel.transform = .init(scaleX: 1, y: 0.85)
@@ -244,7 +245,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
     
     
     
-    private func updateSnap(index: Int) {
+     func updateSnap(index: Int) {
         
         self.setNeedsLayout()
         self.setNeedsDisplay()
