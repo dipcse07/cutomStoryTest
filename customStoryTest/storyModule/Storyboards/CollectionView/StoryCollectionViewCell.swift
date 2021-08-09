@@ -87,7 +87,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
     var fullScreenStoryDelegateForCell: FullScreenSnapDelegate?
     var videoProgressDuration:Float = 0.0
     var videoDuration:Float = 1.0
-    var playingVideoView:IGPlayerView!
+    var playingVideoView:IFPlayerView!
     
     
     
@@ -469,9 +469,9 @@ class StoryCollectionViewCell: UICollectionViewCell{
 
 extension StoryCollectionViewCell {
     
-    private func createVideoView() -> IGPlayerView {
+    private func createVideoView() -> IFPlayerView {
         print("creating New Video View")
-        let videoView = IGPlayerView.init(frame: self.videoView.bounds)
+        let videoView = IFPlayerView.init(frame: self.videoView.bounds)
        videoView.tag = snapIndex + snapViewTagIndicator
         videoView.playerObserverDelegate = self
         print(videoView.subviews.count)
@@ -482,21 +482,21 @@ extension StoryCollectionViewCell {
         return videoView
     }
     
-    private func startPlayer(videoView: IGPlayerView, with url: String) {
+    private func startPlayer(videoView: IFPlayerView, with url: String) {
         print("Starting to Play")
         print(self.videoView.subviews.count)
         if self.videoView.subviews.count > 0 {
             if story.isWholeStoryViewed == false {
-                let videoResource = VideoResource(filePath: url)
+                let videoResource = VideoResourceForCurrentStorySnap(filePath: url)
                 debugPrint(videoResource)
                 videoView.play(with: videoResource)
             }
         }
     }
     
-    private func getVideoView(with index: Int) -> IGPlayerView? {
+    private func getVideoView(with index: Int) -> IFPlayerView? {
         print("Starting to get the Video View")
-        if let videoView = self.videoView.subviews.filter({$0.tag == index + snapViewTagIndicator}).first as? IGPlayerView {
+        if let videoView = self.videoView.subviews.filter({$0.tag == index + snapViewTagIndicator}).first as? IFPlayerView {
             print(videoView.subviews.count)
             self.view.setNeedsLayout()
             return videoView
@@ -506,7 +506,7 @@ extension StoryCollectionViewCell {
 }
 
 
-extension StoryCollectionViewCell: IGPlayerObserver {
+extension StoryCollectionViewCell: IFPlayerObserver {
     func didStartPlaying() {
         print("startplaying")
         if let videoView = getVideoView(with: snapIndex){

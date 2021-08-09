@@ -4,11 +4,11 @@ import UIKit
 import AVKit
 import AVFoundation
 
-struct VideoResource {
+struct VideoResourceForCurrentStorySnap {
     let filePath: String
 }
 
-enum PlayerStatus {
+enum CurrentPlayerStatus {
     case unknown
     case playing
     case failed
@@ -18,22 +18,22 @@ enum PlayerStatus {
 
 //Move Implementation on ViewController or cell which ever the UIElement
 //CALL BACK
-protocol IGPlayerObserver: class {
+protocol IFPlayerObserver: AnyObject {
     func didStartPlaying()
     func didCompletePlay()
     func didTrack(progress: Float)
     func didFailed(withError error: String, for url: URL?)
 }
 
-protocol PlayerControls: class {
-    func play(with resource: VideoResource)
+protocol PlayerControlsForStoryVideos: AnyObject {
+    func play(with resource: VideoResourceForCurrentStorySnap)
     func play()
     func pause()
     func stop()
-    var playerStatus: PlayerStatus { get }
+    var playerStatus: CurrentPlayerStatus { get }
 }
 
-class IGPlayerView: UIView {
+class IFPlayerView: UIView {
     
     //MARK: - Private Vars
     private var timeObserverToken: AnyObject?
@@ -97,7 +97,7 @@ class IGPlayerView: UIView {
     }
     
     //MARK: - Public Vars
-    public weak var playerObserverDelegate: IGPlayerObserver?
+    public weak var playerObserverDelegate: IFPlayerObserver?
     
     //MARK:- Init methods
     override init(frame: CGRect) {
@@ -157,9 +157,9 @@ class IGPlayerView: UIView {
 }
 
 // MARK: - Protocol | PlayerControls
-extension IGPlayerView: PlayerControls {
+extension IFPlayerView: PlayerControlsForStoryVideos {
     
-    func play(with resource: VideoResource) {
+    func play(with resource: VideoResourceForCurrentStorySnap) {
         
         guard let url = URL(string: resource.filePath) else {fatalError("Unable to form URL from resource")}
         if let existingPlayer = player {
@@ -215,7 +215,7 @@ extension IGPlayerView: PlayerControls {
             //player was already deallocated
         }
     }
-    var playerStatus: PlayerStatus {
+    var playerStatus: CurrentPlayerStatus {
         if let p = player {
             switch p.status {
             case .unknown: return .unknown
