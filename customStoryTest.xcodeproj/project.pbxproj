@@ -90,6 +90,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E3FFA6F26C1826300184A2A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				3EB3E2FC26888E3D00B16110 /* Protocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		3EAAB1C2268856A20060A1C8 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +124,7 @@
 				3EAAB1CE268856A20060A1C8 /* AppDelegate.swift */,
 				3EAAB1D0268856A20060A1C8 /* SceneDelegate.swift */,
 				3EAAB1D2268856A20060A1C8 /* ViewController.swift */,
+				3EAAB1E6268857F80060A1C8 /* Resources */,
 				3EAAB1D4268856A20060A1C8 /* Main.storyboard */,
 				3EAAB1D7268856A60060A1C8 /* Assets.xcassets */,
 				3EAAB1D9268856A60060A1C8 /* LaunchScreen.storyboard */,
@@ -127,9 +136,9 @@
 		3EAAB1E4268857F80060A1C8 /* storyModule */ = {
 			isa = PBXGroup;
 			children = (
+				3E3FFA6F26C1826300184A2A /* Protocols */,
 				3EAAB1E5268857F80060A1C8 /* README.md */,
 				3EAAB1F2268857F80060A1C8 /* Models */,
-				3EAAB1E6268857F80060A1C8 /* Resources */,
 				3EAAB1F9268857F80060A1C8 /* Storyboards */,
 			);
 			path = storyModule;
@@ -184,7 +193,6 @@
 		3EAAB1F9268857F80060A1C8 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				3EB3E2FC26888E3D00B16110 /* Protocols.swift */,
 				3E6217B726A2D176009A6AE0 /* IFPlayerView.swift */,
 				3EB3E2FE26896C7C00B16110 /* CollectionView */,
 				3E9853F5269FD89A0065FD6D /* StoryFullVC.swift */,

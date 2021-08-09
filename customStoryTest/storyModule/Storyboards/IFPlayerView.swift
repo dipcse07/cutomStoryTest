@@ -18,20 +18,6 @@ enum CurrentPlayerStatus {
 
 //Move Implementation on ViewController or cell which ever the UIElement
 //CALL BACK
-protocol IFPlayerObserver: AnyObject {
-    func didStartPlaying()
-    func didCompletePlay()
-    func didTrack(progress: Float)
-    func didFailed(withError error: String, for url: URL?)
-}
-
-protocol PlayerControlsForStoryVideos: AnyObject {
-    func play(with resource: VideoResourceForCurrentStorySnap)
-    func play()
-    func pause()
-    func stop()
-    var playerStatus: CurrentPlayerStatus { get }
-}
 
 class IFPlayerView: UIView {
     
@@ -51,7 +37,7 @@ class IFPlayerView: UIView {
             playerItemStatusObserver = playerItem?.observe(\AVPlayerItem.status, options: [.new, .initial], changeHandler: { [weak self] (item, _) in
                 guard let strongSelf = self else { return }
                 if item.status == .failed {
-                    strongSelf.activityIndicator.stopAnimating()
+                    strongSelf.videoActivityIndicator.stopAnimating()
                     if let item = strongSelf.player?.currentItem, let error = item.error, let url = item.asset as? AVURLAsset {
                         strongSelf.playerObserverDelegate?.didFailed(withError: error.localizedDescription, for: url.url)
                     } else {
@@ -74,7 +60,7 @@ class IFPlayerView: UIView {
                 guard let strongSelf = self else { return }
                 if player.timeControlStatus == .playing {
                     //Started Playing
-                    strongSelf.activityIndicator.stopAnimating()
+                    strongSelf.videoActivityIndicator.stopAnimating()
                     strongSelf.playerObserverDelegate?.didStartPlaying()
                 } else if player.timeControlStatus == .paused {
                     // player paused
@@ -87,7 +73,7 @@ class IFPlayerView: UIView {
     var error: Error? {
         return player?.currentItem?.error
     }
-    var activityIndicator: UIActivityIndicatorView!
+    var videoActivityIndicator: UIActivityIndicatorView!
     
     var currentItem: AVPlayerItem? {
         return player?.currentItem
@@ -101,14 +87,14 @@ class IFPlayerView: UIView {
     
     //MARK:- Init methods
     override init(frame: CGRect) {
-        activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        videoActivityIndicator = UIActivityIndicatorView(style: .whiteLarge)
         super.init(frame: frame)
-        setupActivityIndicator()
+        setupVideoActivityIndicator()
     }
     required init?(coder aDecoder: NSCoder) {
-        activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        videoActivityIndicator = UIActivityIndicatorView(style: .whiteLarge)
         super.init(coder: aDecoder)
-        setupActivityIndicator()
+        setupVideoActivityIndicator()
     }
     deinit {
         if let existingPlayer = player, existingPlayer.observationInfo != nil {
@@ -118,12 +104,12 @@ class IFPlayerView: UIView {
     }
     
     // MARK: - Internal methods
-    func setupActivityIndicator() {
-        activityIndicator.hidesWhenStopped = true
+    func setupVideoActivityIndicator() {
+        videoActivityIndicator.hidesWhenStopped = true
         //backgroundColor = UIColor.rgb(from: 0xEDF0F1)
         backgroundColor = .black
-        activityIndicator.center = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
-        self.addSubview(activityIndicator)
+        videoActivityIndicator.center = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+        self.addSubview(videoActivityIndicator)
     }
     func removeObservers() {
         cleanUpPlayerPeriodicTimeObserver()
@@ -179,8 +165,8 @@ extension IFPlayerView: PlayerControlsForStoryVideos {
                 self.layer.addSublayer(pLayer)
             }
         }
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
+        videoActivityIndicator.isHidden = false
+        videoActivityIndicator.startAnimating()
         player?.play()
     }
     func play() {

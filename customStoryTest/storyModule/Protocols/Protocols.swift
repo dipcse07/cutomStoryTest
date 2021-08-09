@@ -39,3 +39,21 @@ protocol FullScreenSotryDelegate {
 
     
 }
+
+//MARK:- For IF Video Player
+
+protocol IFPlayerObserver: AnyObject {
+    func didStartPlaying()
+    func didCompletePlay()
+    func didTrack(progress: Float)
+    func didFailed(withError error: String, for url: URL?)
+}
+
+protocol PlayerControlsForStoryVideos: AnyObject {
+    func play(with resource: VideoResourceForCurrentStorySnap)
+    func play()
+    func pause()
+    func stop()
+    var playerStatus: CurrentPlayerStatus { get }
+}
+
