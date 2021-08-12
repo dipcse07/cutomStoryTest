@@ -30,7 +30,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="921"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUh-ih-oYd" userLabel="VideoView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="921"/>
+                                <rect key="frame" x="0.0" y="0.0" width="434" height="929"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="323-8r-vXd" userLabel="ImageView">
@@ -172,14 +172,14 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="pUh-ih-oYd" secondAttribute="trailing" id="8cW-z3-lMk"/>
+                            <constraint firstAttribute="trailing" secondItem="pUh-ih-oYd" secondAttribute="trailing" constant="-20" id="8cW-z3-lMk"/>
                             <constraint firstAttribute="trailing" secondItem="ejp-JF-CIC" secondAttribute="trailing" id="Eri-56-Meg"/>
                             <constraint firstAttribute="trailing" secondItem="323-8r-vXd" secondAttribute="trailing" id="FQo-Ks-f4c"/>
                             <constraint firstItem="ejp-JF-CIC" firstAttribute="leading" secondItem="sRg-zU-meK" secondAttribute="leading" id="Heo-zr-Pfo"/>
                             <constraint firstItem="pUh-ih-oYd" firstAttribute="top" secondItem="sRg-zU-meK" secondAttribute="top" id="JhK-3d-ywO"/>
                             <constraint firstItem="ejp-JF-CIC" firstAttribute="top" secondItem="sRg-zU-meK" secondAttribute="top" id="O3k-hb-Xu5"/>
                             <constraint firstAttribute="bottom" secondItem="323-8r-vXd" secondAttribute="bottom" id="Tv8-br-HY9"/>
-                            <constraint firstAttribute="bottom" secondItem="pUh-ih-oYd" secondAttribute="bottom" id="Uw0-D9-B3f"/>
+                            <constraint firstAttribute="bottom" secondItem="pUh-ih-oYd" secondAttribute="bottom" constant="-8" id="Uw0-D9-B3f"/>
                             <constraint firstItem="323-8r-vXd" firstAttribute="top" secondItem="sRg-zU-meK" secondAttribute="top" id="cuz-8Q-wBv"/>
                             <constraint firstItem="pUh-ih-oYd" firstAttribute="leading" secondItem="sRg-zU-meK" secondAttribute="leading" id="dQd-Sr-FPn"/>
                             <constraint firstAttribute="bottom" secondItem="ejp-JF-CIC" secondAttribute="bottom" id="lY8-U0-69F"/>

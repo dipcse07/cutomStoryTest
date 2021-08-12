@@ -1,7 +1,7 @@
 
 import Foundation
 
-public enum MimeType: String {
+public enum StoryMimeType: String {
     case image
     case video
     case unknown
@@ -12,14 +12,14 @@ public class IFSnap: Codable {
     public let lastUpdated: String
     public let storySnapUrl: String
 	var isSeen = false
-    public var kind: MimeType {
+    public var kind: StoryMimeType {
         switch mimeType {
-        case MimeType.image.rawValue:
-            return MimeType.image
-        case MimeType.video.rawValue:
-            return MimeType.video
+        case StoryMimeType.image.rawValue:
+            return StoryMimeType.image
+        case StoryMimeType.video.rawValue:
+            return StoryMimeType.video
         default:
-            return MimeType.unknown
+            return StoryMimeType.unknown
         }
     }
     enum CodingKeys: String, CodingKey {

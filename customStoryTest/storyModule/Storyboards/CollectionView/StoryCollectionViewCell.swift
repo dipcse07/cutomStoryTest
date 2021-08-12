@@ -77,7 +77,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
     public var storyIndexPath: IndexPath!
     
     var progressTimer = Timer()
-    var isProgressTimerInvalidate:Bool!
+    var isProgressTimerInvalidate = false
     private var automaticDissappearAfterSeconds = 5.0
     private var timerProgressStartAt = 0.0
     private var progressRate = 0.0
@@ -128,7 +128,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
             for storySnap in storySnaps {
                 print(storySnap.kind)
                 if !storySnap.isSeen{
-                    if storySnap.kind != MimeType.video {
+                    if storySnap.kind != StoryMimeType.video {
                         
                         
                         imageView.isHidden = false
@@ -148,7 +148,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
                             print("start player should not start from here")
                             self.playingVideoView = videoView
                             startPlayer(videoView: videoView, with: storySnap.storySnapUrl)
-                            self.initTimerProgress()
+                           self.initTimerProgress()
                         }else {
                             print("start player should start from here")
                             let videoView = createVideoView()
@@ -255,7 +255,11 @@ class StoryCollectionViewCell: UICollectionViewCell{
             }
             let snap = snaps[index]
             print(snap.kind)
-            if snap.kind != MimeType.video {
+            if snap.kind != StoryMimeType.video {
+                if isProgressTimerInvalidate {
+                    self.progressTimer.fire()
+                    isProgressTimerInvalidate = false
+                }
             imageView.isHidden = false
             let storyImageLink = snap.storySnapUrl
           self.storyImageView.kf.setImage(with: URL(string: storyImageLink), placeholder:  nil , options: nil) { (_) in
@@ -471,7 +475,7 @@ extension StoryCollectionViewCell {
     
     private func createVideoView() -> IFPlayerView {
         print("creating New Video View")
-        let videoView = IFPlayerView.init(frame: self.videoView.bounds)
+        let videoView = IFPlayerView.init(frame: CGRect(x: 0, y: 0, width: videoView.frame.width, height: videoView.frame.height))
        videoView.tag = snapIndex + snapViewTagIndicator
         videoView.playerObserverDelegate = self
         print(videoView.subviews.count)

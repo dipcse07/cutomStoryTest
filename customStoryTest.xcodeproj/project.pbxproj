@@ -20,7 +20,7 @@
 		3EAAB1D8268856A60060A1C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EAAB1D7268856A60060A1C8 /* Assets.xcassets */; };
 		3EAAB1DB268856A60060A1C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3EAAB1D9268856A60060A1C8 /* LaunchScreen.storyboard */; };
 		3EAAB1E3268857630060A1C8 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1E2268857630060A1C8 /* Api.swift */; };
-		3EAAB1FC268857F80060A1C8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3EAAB1E5268857F80060A1C8 /* README.md */; };
+		3EAAB1FC268857F80060A1C8 /* STORY_MODULE_README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3EAAB1E5268857F80060A1C8 /* STORY_MODULE_README.md */; };
 		3EAAB1FD268857F80060A1C8 /* Lobster 1.4.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3EAAB1E8268857F80060A1C8 /* Lobster 1.4.otf */; };
 		3EAAB1FE268857F80060A1C8 /* Lobster-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3EAAB1E9268857F80060A1C8 /* Lobster-Regular.ttf */; };
 		3EAAB1FF268857F80060A1C8 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3EAAB1EA268857F80060A1C8 /* Roboto-Medium.ttf */; };
@@ -36,7 +36,7 @@
 		3EAAB209268857F80060A1C8 /* IFStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F6268857F80060A1C8 /* IFStories.swift */; };
 		3EAAB20A268857F80060A1C8 /* IFSingleStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F7268857F80060A1C8 /* IFSingleStory.swift */; };
 		3EAAB20B268857F80060A1C8 /* IFUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAAB1F8268857F80060A1C8 /* IFUser.swift */; };
-		3EB3E2FD26888E3D00B16110 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB3E2FC26888E3D00B16110 /* Protocols.swift */; };
+		3EB3E2FD26888E3D00B16110 /* StoryModuleProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB3E2FC26888E3D00B16110 /* StoryModuleProtocols.swift */; };
 		F3B4B2DDCCF0B90EE25E0DC8 /* Pods_customStoryTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5135FC2C8FC17921B6A5567 /* Pods_customStoryTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +56,7 @@
 		3EAAB1DA268856A60060A1C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3EAAB1DC268856A60060A1C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3EAAB1E2268857630060A1C8 /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
-		3EAAB1E5268857F80060A1C8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3EAAB1E5268857F80060A1C8 /* STORY_MODULE_README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = STORY_MODULE_README.md; sourceTree = "<group>"; };
 		3EAAB1E8268857F80060A1C8 /* Lobster 1.4.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lobster 1.4.otf"; sourceTree = "<group>"; };
 		3EAAB1E9268857F80060A1C8 /* Lobster-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lobster-Regular.ttf"; sourceTree = "<group>"; };
 		3EAAB1EA268857F80060A1C8 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
@@ -72,7 +72,7 @@
 		3EAAB1F6268857F80060A1C8 /* IFStories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFStories.swift; sourceTree = "<group>"; };
 		3EAAB1F7268857F80060A1C8 /* IFSingleStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFSingleStory.swift; sourceTree = "<group>"; };
 		3EAAB1F8268857F80060A1C8 /* IFUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFUser.swift; sourceTree = "<group>"; };
-		3EB3E2FC26888E3D00B16110 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		3EB3E2FC26888E3D00B16110 /* StoryModuleProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModuleProtocols.swift; sourceTree = "<group>"; };
 		71DD9A716CB852676E084E47 /* Pods-customStoryTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-customStoryTest.debug.xcconfig"; path = "Target Support Files/Pods-customStoryTest/Pods-customStoryTest.debug.xcconfig"; sourceTree = "<group>"; };
 		C718A13E7D9DBB4AA132A43E /* Pods-customStoryTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-customStoryTest.release.xcconfig"; path = "Target Support Files/Pods-customStoryTest/Pods-customStoryTest.release.xcconfig"; sourceTree = "<group>"; };
 		E5135FC2C8FC17921B6A5567 /* Pods_customStoryTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_customStoryTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,7 +93,7 @@
 		3E3FFA6F26C1826300184A2A /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				3EB3E2FC26888E3D00B16110 /* Protocols.swift */,
+				3EB3E2FC26888E3D00B16110 /* StoryModuleProtocols.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -121,10 +121,10 @@
 			children = (
 				3EAAB1E4268857F80060A1C8 /* storyModule */,
 				3EAAB1E2268857630060A1C8 /* Api.swift */,
+				3EAAB1E7268857F80060A1C8 /* Fonts */,
 				3EAAB1CE268856A20060A1C8 /* AppDelegate.swift */,
 				3EAAB1D0268856A20060A1C8 /* SceneDelegate.swift */,
 				3EAAB1D2268856A20060A1C8 /* ViewController.swift */,
-				3EAAB1E6268857F80060A1C8 /* Resources */,
 				3EAAB1D4268856A20060A1C8 /* Main.storyboard */,
 				3EAAB1D7268856A60060A1C8 /* Assets.xcassets */,
 				3EAAB1D9268856A60060A1C8 /* LaunchScreen.storyboard */,
@@ -137,7 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				3E3FFA6F26C1826300184A2A /* Protocols */,
-				3EAAB1E5268857F80060A1C8 /* README.md */,
+				3EAAB1E5268857F80060A1C8 /* STORY_MODULE_README.md */,
+				3EAAB1E6268857F80060A1C8 /* Resources */,
 				3EAAB1F2268857F80060A1C8 /* Models */,
 				3EAAB1F9268857F80060A1C8 /* Storyboards */,
 			);
@@ -147,7 +148,6 @@
 		3EAAB1E6268857F80060A1C8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3EAAB1E7268857F80060A1C8 /* Fonts */,
 				3E6217B926A32430009A6AE0 /* Extensions.swift */,
 			);
 			path = Resources;
@@ -297,7 +297,7 @@
 				3EAAB1FF268857F80060A1C8 /* Roboto-Medium.ttf in Resources */,
 				3EAAB202268857F80060A1C8 /* Uni Sans Heavy.otf in Resources */,
 				3EAAB1D8268856A60060A1C8 /* Assets.xcassets in Resources */,
-				3EAAB1FC268857F80060A1C8 /* README.md in Resources */,
+				3EAAB1FC268857F80060A1C8 /* STORY_MODULE_README.md in Resources */,
 				3E9853F8269FD89A0065FD6D /* StoryFullVC.xib in Resources */,
 				3EAAB201268857F80060A1C8 /* Uni Sans Heavy Italic.otf in Resources */,
 				3EAAB1D6268856A20060A1C8 /* Main.storyboard in Resources */,
@@ -364,7 +364,7 @@
 				3E9853F7269FD89A0065FD6D /* StoryFullVC.swift in Sources */,
 				3EAAB1E3268857630060A1C8 /* Api.swift in Sources */,
 				3E6217BA26A32430009A6AE0 /* Extensions.swift in Sources */,
-				3EB3E2FD26888E3D00B16110 /* Protocols.swift in Sources */,
+				3EB3E2FD26888E3D00B16110 /* StoryModuleProtocols.swift in Sources */,
 				3EAAB1D1268856A20060A1C8 /* SceneDelegate.swift in Sources */,
 				3EA2809D26898D23001B7A41 /* StoryCollectionViewCell.swift in Sources */,
 				3EAAB206268857F80060A1C8 /* IFGroupInfo.swift in Sources */,
