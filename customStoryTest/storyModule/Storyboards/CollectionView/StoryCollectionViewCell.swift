@@ -553,6 +553,7 @@ extension StoryCollectionViewCell: IFPlayerObserver {
     
     
     func didCompletePlay() {
+        self.initTimerProgress()
         self.nextAction()
     }
     
