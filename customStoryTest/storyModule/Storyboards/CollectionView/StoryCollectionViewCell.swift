@@ -142,19 +142,21 @@ class StoryCollectionViewCell: UICollectionViewCell{
                 break
                     
                     }else {
+                        self.progressTimer.invalidate()
+                        self.isProgressTimerInvalidate = true
                         imageView.isHidden = true
                         debugPrint(storySnap.storySnapUrl)
                         if let videoView = getVideoView(with: self.snapIndex) {
                             print("start player should not start from here")
                             self.playingVideoView = videoView
                             startPlayer(videoView: videoView, with: storySnap.storySnapUrl)
-                           self.initTimerProgress()
+                           //self.initTimerProgress()
                         }else {
                             print("start player should start from here")
                             let videoView = createVideoView()
                             self.playingVideoView = videoView
                             startPlayer(videoView: videoView, with: storySnap.storySnapUrl)
-                            self.initTimerProgress()
+                           // self.initTimerProgress()
                         }
                         break
                     }
@@ -268,6 +270,8 @@ class StoryCollectionViewCell: UICollectionViewCell{
                 
             } else {
                 imageView.isHidden = true
+                self.progressTimer.invalidate()
+                self.isProgressTimerInvalidate = true
                 debugPrint(snap.storySnapUrl)
                 if let videoView = getVideoView(with: snapIndex) {
                     startPlayer(videoView: videoView, with: snap.storySnapUrl)
@@ -549,7 +553,7 @@ extension StoryCollectionViewCell: IFPlayerObserver {
     
     
     func didCompletePlay() {
-        
+        self.nextAction()
     }
     
     func didTrack(progress: Float) {
