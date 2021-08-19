@@ -9,17 +9,21 @@ import UIKit
 import Kingfisher
 
 class StoryCollectionViewCell: UICollectionViewCell{
-    
-    
+//    /Volumes/MYMACHDD/XcodeTutoProjects/customStoryTest/IFStory/Sources/IFStory/CollectionView/StoryCollectionViewCell.swift:9:8: Compiling for iOS 9.0, but module 'Kingfisher' has a minimum deployment target of iOS 10.0: /Users/dip/Library/Developer/Xcode/DerivedData/customStoryTest-fcxpayneqsohjrajmmbczeujtsbh/Build/Products/Debug-iphoneos/Kingfisher.swiftmodule/arm64-apple-ios.swiftmodule
+//    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         // self.setupViewDidLoad()
+       // self.setUpConstraintsForVideoAndImagePreviewView()
         self.setupViewDidLoad()
-        
     }
+    
+   
     public var story: IFSingleStory! {
         didSet{
+           // self.setUpConstraintsForVideoAndImagePreviewView()
+            self.setUpConstraintsForVideoAndImagePreviewView()
             self.setupViewWillAppear()
             print("story count after Passing story",story.snapsInSingleStory?.count)
             
@@ -40,6 +44,8 @@ class StoryCollectionViewCell: UICollectionViewCell{
     @IBOutlet weak var imageView: UIView!
     @IBOutlet weak var view: UIView!
     
+    @IBOutlet weak var progressView: UIView!
+    
     @IBOutlet var progressViewHolder: UIView!
     
     @IBOutlet var topTitleLabel: UILabel!
@@ -49,12 +55,9 @@ class StoryCollectionViewCell: UICollectionViewCell{
     @IBOutlet var avatarImageView: UIImageView!
     @IBOutlet var leftIconImageView: UIImageView!
     @IBOutlet var rightIconImageView: UIImageView!
+    @IBOutlet weak var resizableView:UIView!
     
     @IBOutlet var countLabel: UILabel!
-    
-    
-    
-    
     
     @IBOutlet var nextButton: UIButton! {
         didSet {
@@ -89,14 +92,42 @@ class StoryCollectionViewCell: UICollectionViewCell{
     var videoDuration:Float = 1.0
     var playingVideoView:IFPlayerView!
     
+    var resizeViewTopContraints:CGFloat = 0
+    var resizeViewBottomConstraints:CGFloat = 0
+    var resizeViewLeftConstraints:CGFloat = 0
+    var resizeViewRightConstraints:CGFloat = 0
+    var resizeViewCornerRadius:CGFloat = 0
+
     
     
     
-    //    override var prefersStatusBarHidden: Bool {
-    //        return true
-    //    }
+   private func setUpConstraintsForVideoAndImagePreviewView() {
+
+        self.resizableView.translatesAutoresizingMaskIntoConstraints = false
+
+        if resizeViewCornerRadius == 0 {
+
+        self.resizableView.topAnchor.constraint(equalTo: self.progressView.topAnchor , constant: resizeViewTopContraints).isActive = true
+            self.resizableView.leftAnchor.constraint(equalTo: self.progressView.leftAnchor, constant: resizeViewLeftConstraints).isActive = true
+            self.resizableView.rightAnchor.constraint(equalTo: self.progressView.rightAnchor, constant: -resizeViewRightConstraints).isActive = true
+            self.resizableView.bottomAnchor.constraint(equalTo: self.progressView.bottomAnchor, constant: -resizeViewBottomConstraints).isActive = true
+            self.resizableView.layer.cornerRadius = resizeViewCornerRadius
+        
+        } else if resizeViewCornerRadius > 0 {
+            self.progressView.backgroundColor = UIColor(hex: "#56B07F")
+            self.resizableView.topAnchor.constraint(equalTo: self.avatarImageView.bottomAnchor , constant: resizeViewTopContraints).isActive = true
+            self.resizableView.leftAnchor.constraint(equalTo: self.progressView.leftAnchor, constant: resizeViewLeftConstraints).isActive = true
+            self.resizableView.rightAnchor.constraint(equalTo: self.progressView.rightAnchor, constant: -resizeViewRightConstraints).isActive = true
+            self.resizableView.bottomAnchor.constraint(equalTo: self.progressView.bottomAnchor, constant: -resizeViewBottomConstraints).isActive = true
+                self.resizableView.layer.cornerRadius = resizeViewCornerRadius
+            
+        }
+        
+        
+        
+    }
     
-    
+  
     private func setupViewDidLoad() {
         //self.stories = igStories.stories
         self.avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width * 0.50
@@ -107,6 +138,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         avatarImageView.isUserInteractionEnabled = true
         avatarImageView.addGestureRecognizer(tapGestureRecognizer)
+        
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
@@ -227,7 +259,11 @@ class StoryCollectionViewCell: UICollectionViewCell{
         stackView.distribution  = .fillEqually
         stackView.alignment = .center
         stackView.spacing   = 8.0
-        stackView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width-40, height: 6)
+        stackView.frame = CGRect(x: 0, y: 0, width: self.progressViewHolder.frame.width, height: 6)
+
+//        stackView.centerYanchor.constraint(equalTo: self.progressViewHolder.centerYanchor).isActive = true
+       
+       
         
         
         //stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -243,6 +279,9 @@ class StoryCollectionViewCell: UICollectionViewCell{
             self.topProgressViews.append(progressView)
         }
         self.progressViewHolder.addSubview(stackView)
+                stackView.translatesAutoresizingMaskIntoConstraints = false
+                stackView.leftAnchor.constraint(equalTo: self.progressViewHolder.leftAnchor, constant:0).isActive = true
+                stackView.rightAnchor.constraint(equalTo: self.progressViewHolder.rightAnchor, constant:0).isActive = true
     }
     
     
@@ -484,9 +523,15 @@ extension StoryCollectionViewCell {
         videoView.playerObserverDelegate = self
         print(videoView.subviews.count)
         print(self.videoView.subviews.count)
+        videoView.translatesAutoresizingMaskIntoConstraints = false
         self.videoView.addSubview(videoView)
+        videoView.topAnchor.constraint(equalTo: self.videoView.topAnchor).isActive = true
+        videoView.leftAnchor.constraint(equalTo: self.videoView.leftAnchor).isActive = true
+        videoView.rightAnchor.constraint(equalTo: self.videoView.rightAnchor).isActive = true
+        videoView.bottomAnchor.constraint(equalTo: self.videoView.bottomAnchor).isActive = true
+        
         print(self.videoView.subviews.count)
-        self.view.setNeedsLayout()
+        self.videoView.setNeedsLayout()
         return videoView
     }
     

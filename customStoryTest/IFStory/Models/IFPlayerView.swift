@@ -108,8 +108,16 @@ class IFPlayerView: UIView {
         videoActivityIndicator.hidesWhenStopped = true
         //backgroundColor = UIColor.rgb(from: 0xEDF0F1)
         backgroundColor = .black
-        videoActivityIndicator.center = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
+       // videoActivityIndicator.center = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         self.addSubview(videoActivityIndicator)
+        // Springs and struts
+        videoActivityIndicator.center = self.center
+        videoActivityIndicator.autoresizingMask = [
+                    .flexibleLeftMargin,
+                    .flexibleRightMargin,
+                    .flexibleTopMargin,
+                    .flexibleBottomMargin
+                ]
     }
     func removeObservers() {
         cleanUpPlayerPeriodicTimeObserver()
@@ -160,7 +168,7 @@ extension IFPlayerView: PlayerControlsForStoryVideos {
             playerLayer = AVPlayerLayer(player: player)
             setupPlayerPeriodicTimeObserver()
             if let pLayer = playerLayer {
-                pLayer.videoGravity = .resizeAspect
+                pLayer.videoGravity = .resizeAspectFill
                 pLayer.frame = self.bounds
                 self.layer.addSublayer(pLayer)
             }

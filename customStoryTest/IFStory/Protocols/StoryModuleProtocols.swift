@@ -23,7 +23,7 @@ protocol FullScreenSnapDelegate {
     
 }
 
-protocol FullScreenSotryDelegate {
+public protocol FullScreenSotryDelegate {
     func snapDidAppear(currentSnapInProgress:IFSnap?)
     func snapWillAppear(nextSnap: IFSnap?)
     //func snapWillDisappear()

@@ -14,6 +14,14 @@ public class StoryFullVC: UIViewController {
     var delegate: FullScreenSotryDelegate?
     var storyIndex: Int!
     var previousSnap: IFSnap!
+    
+    private var previewViewTop:CGFloat = 0
+    private var previewViewLeft:CGFloat = 0
+    private var previewViewRight:CGFloat = 0
+    private var previewViewBottom:CGFloat = 0
+    private var previewViewRoundedCorner:CGFloat = 0
+    
+    
     private var stories = [IFSingleStory]()
     
     @IBOutlet weak var storyCollectionView: UICollectionView!
@@ -30,6 +38,15 @@ public class StoryFullVC: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func setVideoOrImageView(top:CGFloat = 0, left:CGFloat = 0, right:CGFloat = 0, bottom:CGFloat = 0, cornerRadius:CGFloat){
+        previewViewTop = top
+        previewViewLeft = left
+        previewViewRight = right
+        previewViewBottom = bottom
+        previewViewRoundedCorner = cornerRadius
+        
     }
     
     public override func viewDidLoad() {
@@ -86,6 +103,14 @@ extension StoryFullVC:  UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = storyCollectionView.dequeueReusableCell(withReuseIdentifier: "StoryCollectionViewCell", for: indexPath) as! StoryCollectionViewCell
         print(indexPath.row, indexPath.item)
+        
+        cell.resizeViewTopContraints = previewViewTop
+        cell.resizeViewLeftConstraints = previewViewLeft
+        cell.resizeViewRightConstraints = previewViewRight
+        cell.resizeViewBottomConstraints = previewViewBottom
+        cell.resizeViewCornerRadius = previewViewRoundedCorner
+
+        
         cell.story = self.stories[indexPath.item]
         cell.storyIndexPath = indexPath
         cell.fullScreenStoryDelegateForCell = self
@@ -93,17 +118,17 @@ extension StoryFullVC:  UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        if !onceOnly {
-//              let indexToScrollTo = IndexPath(item: storyIndex , section: 0)
-//              self.storyCollectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
-//            delegate?.storyDidAppear(currentStoryInProgress: stories[indexToScrollTo.item])
-//              onceOnly = true
-//            }
+        if !onceOnly {
+              let indexToScrollTo = IndexPath(item: storyIndex , section: 0)
+              self.storyCollectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
+            delegate?.storyDidAppear(currentStoryInProgress: stories[indexToScrollTo.item])
+              onceOnly = true
+            }
         
-       let currentCell = cell as! StoryCollectionViewCell
-        print(currentCell.isProgressTimerInvalidate)
-        currentCell.setupViewWillAppear()
-        
+//       let currentCell = cell as! StoryCollectionViewCell
+//        print(currentCell.isProgressTimerInvalidate)
+//        currentCell.setupViewWillAppear()
+//        
         
         
     }
