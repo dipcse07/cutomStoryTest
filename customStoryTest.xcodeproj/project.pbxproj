@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -36,6 +36,7 @@
 		3ECD7F1A26CEB66B0022258F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD7F0C26CEB66B0022258F /* Extensions.swift */; };
 		3ECD7F1B26CEB66B0022258F /* StoryFullVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD7F0E26CEB66B0022258F /* StoryFullVC.swift */; };
 		3ECD7F1C26CEB66B0022258F /* StoryFullVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ECD7F0F26CEB66B0022258F /* StoryFullVC.xib */; };
+		3ECD7F1F26CEBBC60022258F /* IFStory in Frameworks */ = {isa = PBXBuildFile; productRef = 3ECD7F1E26CEBBC60022258F /* IFStory */; };
 		F3B4B2DDCCF0B90EE25E0DC8 /* Pods_customStoryTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5135FC2C8FC17921B6A5567 /* Pods_customStoryTest.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		3ECD7F0C26CEB66B0022258F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3ECD7F0E26CEB66B0022258F /* StoryFullVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryFullVC.swift; sourceTree = "<group>"; };
 		3ECD7F0F26CEB66B0022258F /* StoryFullVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoryFullVC.xib; sourceTree = "<group>"; };
+		3ECD7F1D26CEBBA60022258F /* IFStory */ = {isa = PBXFileReference; lastKnownFileType = folder; name = IFStory; path = ../IFStory; sourceTree = "<group>"; };
 		71DD9A716CB852676E084E47 /* Pods-customStoryTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-customStoryTest.debug.xcconfig"; path = "Target Support Files/Pods-customStoryTest/Pods-customStoryTest.debug.xcconfig"; sourceTree = "<group>"; };
 		C718A13E7D9DBB4AA132A43E /* Pods-customStoryTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-customStoryTest.release.xcconfig"; path = "Target Support Files/Pods-customStoryTest/Pods-customStoryTest.release.xcconfig"; sourceTree = "<group>"; };
 		E5135FC2C8FC17921B6A5567 /* Pods_customStoryTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_customStoryTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +84,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3B4B2DDCCF0B90EE25E0DC8 /* Pods_customStoryTest.framework in Frameworks */,
+				3ECD7F1F26CEBBC60022258F /* IFStory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +94,7 @@
 		3EAAB1C2268856A20060A1C8 = {
 			isa = PBXGroup;
 			children = (
+				3ECD7F1D26CEBBA60022258F /* IFStory */,
 				3EAAB1CD268856A20060A1C8 /* customStoryTest */,
 				3EAAB1CC268856A20060A1C8 /* Products */,
 				D3829662F6E77444A18DF645 /* Pods */,
@@ -242,6 +246,9 @@
 			dependencies = (
 			);
 			name = customStoryTest;
+			packageProductDependencies = (
+				3ECD7F1E26CEBBC60022258F /* IFStory */,
+			);
 			productName = customStoryTest;
 			productReference = 3EAAB1CB268856A20060A1C8 /* customStoryTest.app */;
 			productType = "com.apple.product-type.application";
@@ -567,6 +574,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3ECD7F1E26CEBBC60022258F /* IFStory */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = IFStory;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3EAAB1C3268856A20060A1C8 /* Project object */;
 }

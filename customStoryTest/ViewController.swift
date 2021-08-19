@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import IFStory
 
 class ViewController: UIViewController {
     
@@ -26,8 +27,9 @@ class ViewController: UIViewController {
                     if let stories = stories, stories.totalStoryCount > 0 {
                         print(stories.stories.debugDescription)
                         self.stories = stories
+                        
                         let fullStoryVC = StoryFullVC(with: stories, handPickedStoryIndex: 0, delegate: self)
-
+                        fullStoryVC.setVideoOrImageView(top: 15, left: 16, right: 16, bottom: 16, cornerRadius: 25)
                         self.present(fullStoryVC, animated: true, completion: nil)
                     print(error)
                 }
@@ -39,6 +41,7 @@ class ViewController: UIViewController {
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         let fullStoryVC = StoryFullVC(with: self.stories!, handPickedStoryIndex: 0, delegate: self)//StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)
+        fullStoryVC.setVideoOrImageView(top: 15, left: 16, right: 16, bottom: 16, cornerRadius: 25)
         self.present(fullStoryVC, animated: true, completion: nil)
     }
     
@@ -46,6 +49,7 @@ class ViewController: UIViewController {
     @IBAction func b2(_ sender: UIButton) {
         
         let fullStoryVC = StoryFullVC(with: self.stories!, handPickedStoryIndex: 1, delegate: self)//StoryFullScreenViewer.instantiate(with: stories, handPickedStoryIndex: 0, delegate: self)
+        fullStoryVC.setVideoOrImageView(top: 15, left: 16, right: 16, bottom: 16, cornerRadius: 25)
         self.present(fullStoryVC, animated: true, completion: nil)
     }
     
