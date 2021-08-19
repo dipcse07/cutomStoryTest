@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import IFStory
 
 
 let domain = "https://classchatapi.thebitlabs.com"
