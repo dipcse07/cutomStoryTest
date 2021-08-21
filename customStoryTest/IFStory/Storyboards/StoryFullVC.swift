@@ -118,16 +118,16 @@ extension StoryFullVC:  UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if !onceOnly {
-              let indexToScrollTo = IndexPath(item: storyIndex , section: 0)
-              self.storyCollectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
-            delegate?.storyDidAppear(currentStoryInProgress: stories[indexToScrollTo.item])
-              onceOnly = true
-            }
-        
-//       let currentCell = cell as! StoryCollectionViewCell
-//        print(currentCell.isProgressTimerInvalidate)
-//        currentCell.setupViewWillAppear()
+//        if !onceOnly {
+//              let indexToScrollTo = IndexPath(item: storyIndex , section: 0)
+//              self.storyCollectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
+//            delegate?.storyDidAppear(currentStoryInProgress: stories[indexToScrollTo.item])
+//              onceOnly = true
+//            }
+//        
+       let currentCell = cell as! StoryCollectionViewCell
+        print(currentCell.isProgressTimerInvalidate)
+        currentCell.setupViewWillAppear()
 //        
         
         

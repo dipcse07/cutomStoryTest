@@ -122,9 +122,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
                 self.resizableView.layer.cornerRadius = resizeViewCornerRadius
             
         }
-        
-        
-        
+
     }
     
   
@@ -343,16 +341,16 @@ class StoryCollectionViewCell: UICollectionViewCell{
     
     @objc func nextAction() {
         
-        let imagesInCurrentStory = story.snapsInSingleStory
+        let snapsInCurrentStory = story.snapsInSingleStory
         
-        if self.currentViewingStoryIndex < imagesInCurrentStory!.count-1 {
+        if self.currentViewingStoryIndex < snapsInCurrentStory!.count-1 {
             
             if playingVideoView != nil {
                 playingVideoView.stop()
             }
             
             
-            if self.snapIndex < imagesInCurrentStory!.count-1 {
+            if self.snapIndex < snapsInCurrentStory!.count-1 {
                 
                 self.topProgressViews[snapIndex].progress = 1.0
                 
@@ -368,6 +366,7 @@ class StoryCollectionViewCell: UICollectionViewCell{
             }
             else {
                 self.snapIndex = 0
+                self.currentViewingStoryIndex = 0
                 self.progressTimer.invalidate()
                 currentViewingStoryIndex += 1
                 fullScreenStoryDelegateForCell?.snapClosed(isClosed: false, atStroy: story, forStoryIndexPath: storyIndexPath, forSnap: (story.snapsInSingleStory?.last)!)
@@ -379,10 +378,11 @@ class StoryCollectionViewCell: UICollectionViewCell{
             
         }
         else {
-            if self.snapIndex < imagesInCurrentStory!.count-1 {
+            if self.snapIndex < snapsInCurrentStory!.count-1 {
                 
             }
             else {
+                self.snapIndex = 0
                 currentViewingStoryIndex = 0
                 self.progressTimer.invalidate()
                 fullScreenStoryDelegateForCell?.snapClosed(isClosed: false, atStroy: story, forStoryIndexPath: storyIndexPath, forSnap: (story.snapsInSingleStory?.last)!)
@@ -425,9 +425,6 @@ class StoryCollectionViewCell: UICollectionViewCell{
                                 }
                 fullScreenStoryDelegateForCell?.goToPreviousStroy(atStroy: story, forStoryIndexPath: storyIndexPath, forCell: self, forSnap: (story.snapsInSingleStory?.first)!)
             }
-            
-            
-        
     }
     
     
